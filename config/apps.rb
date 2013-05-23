@@ -27,12 +27,10 @@
 #
 Padrino.configure_apps do
   # enable :sessions
-  set :session_secret, '76af48c0d75f70d6f44baac319929292aec91cf6d0456f6ec19941122f010709'
+  set :session_secret, '86c96aee54fe0b4a717d31e9483942b872eeed897314e7a3b354c86a457c4cc2'
   set :protection, true
   set :protect_from_csrf, true
 end
 
 # Mounts the core application for this project
-Padrino.mount('MoneyCalendar::App', :app_file => Padrino.root('app/app.rb')).to('/')
-
-Padrino.mount("MoneyCalendar::Admin", :app_file => File.expand_path('../../admin/app.rb', __FILE__)).to("/admin")
+Padrino.mount('Camilo::App', :app_file => Padrino.root('app/app.rb')).to('/')

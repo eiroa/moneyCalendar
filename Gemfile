@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # gemspec
 
 # Server requirements
-# gem 'thin' # or mongrel
+gem 'thin' # or mongrel
 # gem 'trinidad', :platform => 'jruby'
 
 # Optional JSON codec (faster performance)
@@ -12,13 +12,11 @@ source 'https://rubygems.org'
 
 # Project requirements
 gem 'rake'
-gem 'tilt', '1.3.4'
-gem 'cucumber'
 
 # Component requirements
-gem 'bcrypt-ruby', :require => 'bcrypt'
-gem 'haml'
-gem 'dm-sqlite-adapter'
+gem 'slim'
+gem 'pg', :group => 'production'
+gem 'dm-postgres-adapter', :group => 'production'
 gem 'dm-validations'
 gem 'dm-timestamps'
 gem 'dm-migrations'
@@ -26,9 +24,13 @@ gem 'dm-constraints'
 gem 'dm-aggregates'
 gem 'dm-types'
 gem 'dm-core'
+gem 'tilt', '1.3.7'
 
 # Test requirements
+gem 'dm-sqlite-adapter', :group => 'test' 
 gem 'rspec', :group => 'test'
+gem 'capybara', :group => 'test'
+gem 'cucumber', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
 
 # Padrino Stable Gem

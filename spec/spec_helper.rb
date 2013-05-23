@@ -9,5 +9,5 @@ def app
   ##
   # You can handle all padrino applications using instead:
   #   Padrino.application
-  MoneyCalendar::App.tap { |app|  }
+  Camilo::App.tap { |app|  }
 end

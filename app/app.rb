@@ -1,4 +1,4 @@
-module MoneyCalendar
+module Camilo
   class App < Padrino::Application
     register Padrino::Rendering
     register Padrino::Mailer
@@ -57,5 +57,8 @@ module MoneyCalendar
     #     render 'errors/505'
     #   end
     #
+    get '/' do
+      render 'home/index'
+    end
   end
 end
