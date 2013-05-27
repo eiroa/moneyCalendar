@@ -58,7 +58,8 @@ module Camilo
     #   end
     #
     get '/' do
-      render 'home/index'
+      #render 'home/index'
+      ' Coming Soon!! MoneyCalendar is still under development'
     end
   end
 end
