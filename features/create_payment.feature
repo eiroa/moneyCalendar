@@ -1,4 +1,4 @@
-
+@wip
 Feature: Create new Payment
   In order to register a new Payment
   As a user
