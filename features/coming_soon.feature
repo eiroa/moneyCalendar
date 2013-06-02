@@ -5,4 +5,4 @@ Feature: Coming soon
 
   Scenario: Browse default
     When I go to "the home page"
-    Then I should see "Gracias por tu visita"
+    Then I should see "Coming Soon!! MoneyCalendar is still under development"
