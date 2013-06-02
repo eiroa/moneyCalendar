@@ -6,6 +6,19 @@ module Camilo
 
     enable :sessions
 
+    get '/' do
+      #render 'home/index'
+      ' Coming Soon!! MoneyCalendar is still under development'
+    end
+
+    get '/coming_expirations' do
+        render 'coming_expirations'
+    end
+
+    get '/new_spending' do
+        render 'new_spending'
+    end
+
     ##
     # Caching support
     #
@@ -57,9 +70,5 @@ module Camilo
     #     render 'errors/505'
     #   end
     #
-    get '/' do
-      #render 'home/index'
-      ' Coming Soon!! MoneyCalendar is still under development'
-    end
   end
 end

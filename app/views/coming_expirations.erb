@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Coming expirations - Money Calendar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body align="center">
+  <h1>Money Calendar</h1>
+  <h2>Coming expirations</h2>
+
+  <table align="center" border="1">
+    <tr>
+      <th>Spending Name</th>
+      <th>Expiry date</th>
+
+      <!-- <td><#%= pay.name %></td>
+      <td><#%= pay.expiry_date %></td> -->
+      <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
+
+      <% 10.times do |i| #pay = @payments.get(i)%>
+        <tr>
+          <td><%="a_name_#{i}"%></td>
+          <td><%="a_expity_date_#{i}"%></td>
+        </tr>
+      <% end %>
+    </tr>
+  </table>
+
+  <form action="new_spending" method="get">
+    <input type="submit" value="Add new spending">
+  </form>
+
+</body>
+</html>
+
