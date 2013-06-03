@@ -15,6 +15,16 @@ module MoneyCalendar
       @expirations = SortPayments.getLast(10)
       render 'coming_expirations'
     end
+    
+    get '/save_payment' do
+      payment = Payment.new
+      payment.name = params[:name]
+      payment.amount = params[:amount]
+      payment.expiry_date = params[:date]
+      payment.save
+            
+      redirect 'coming_expirations'
+    end
 
     post '/savePayment' ,:csrf_protection => false do
       render 'coming_expirations'
