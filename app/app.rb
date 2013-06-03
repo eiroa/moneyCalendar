@@ -26,10 +26,6 @@ module MoneyCalendar
       redirect 'coming_expirations'
     end
 
-    post '/savePayment' ,:csrf_protection => false do
-      render 'coming_expirations'
-    end
-
     get '/new_spending' do
       render 'new_spending'
     end
