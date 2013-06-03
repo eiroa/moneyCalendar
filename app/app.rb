@@ -3,7 +3,7 @@ module Camilo
     register Padrino::Rendering
     register Padrino::Mailer
     register Padrino::Helpers
-
+    set :protection, :except => [:json_csrf]
     enable :sessions
 
     get '/' do
@@ -14,6 +14,12 @@ module Camilo
     get '/coming_expirations' do
         render 'coming_expirations'
     end
+
+    post '/savePayment' ,:csrf_protection => false do
+  
+      render 'coming_expirations'
+  
+  end
 
     get '/new_spending' do
         render 'new_spending'
