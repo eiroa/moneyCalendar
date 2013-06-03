@@ -15,7 +15,9 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
-
+    when /register payment page/
+      '/new_spending'
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

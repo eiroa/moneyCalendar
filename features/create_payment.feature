@@ -4,41 +4,40 @@ Feature: Create new Payment
   As a user
   I want to be able to register a payment
 
-  Background:
-    Given i am logged in
+  
 
   Scenario: Happy Path
     Given I am on "register payment page"
-    And I fill in "payment[name]" with "Gasto-test"
-    And I fill in "payment[amount]" with "1000"
-    And I fill in "payment[paymentDate]" with "1/1/2020"
-    And I fill in "payment[periodicity]" with "1"
+    And I fill in "name" with "Gasto-test"
+    And I fill in "amount" with "1000"
+    And I fill in "paymentDate" with "2020/1/1"
+    And I fill in "periodicity" with "1"
     When I press "saveButton"
     Then I should see "The Gasto-test payment has been registered"
 
   Scenario: Name is blank
     Given I am on "register payment page"
-    And I fill in "payment[name]" with " "
+    And I fill in "name" with " "
     When I press "saveButton"
     Then I should see "Error, name is required"
 
   Scenario: Payment already exists
     Given I am on "register payment page"
-    And I fill in "payment[name]" with "Gasto-test"
+    And I fill in "name" with "Gasto-test"
     And I press "saveButton"
     And I go to "register payment page"
-    And I fill in "payment[name]" with "Gasto-test"
+    And I fill in "name" with "Gasto-test"
     Then I should see "Warning, another payment with the same name already exists"
 
   Scenario: Amount is blank
     Given I am on "register payment page"
-    And I fill in "payment[amount]" with " "
+    And I fill in "amount" with "1000"
     When I press "saveButton"
     Then I should see "Error, amount is required"
 
   Scenario: Amount is not a number
     Given I am on "register payment page"
-    And I fill in "payment[amount]" with not anumber
+    And I fill in "amount" with nota number
     When I press "saveButton"
     Then I should see "Error, amount is not a number"
 
@@ -50,25 +49,25 @@ Feature: Create new Payment
 
   Scenario: Payment Date is set earlier than actual date
     Given I am on "register payment page"
-    And I fill in "payment[paymentDate]" with "1/1/2000"
+    And I fill in "paymentDate" with "1/1/2000"
     When I press "saveButton"
     Then I should see "Warning, Payment Date is earlier than today"  
 
   Scenario: Payment Date is not properly formatted
     Given I am on "register payment page"
-    And I fill in "payment[paymentDate]" with not a valid date
+    And I fill in "paymentDate" with not a valid date
     When I press "saveButton"
     Then I should see "Error, Payment Date is invalid"  
 
   Scenario: Periodicity is blank
     Given I am on "register payment page"
-    And I fill in "payment[periodicity]" with " "
+    And I fill in "periodicity" with " "
     When I press "saveButton"
     Then I should see "Error, periodicity is required"
 
   Scenario: Periodicity is not valid
     Given I am on "register payment page"
-    And I fill in "payment[periodicity]" with not a valid periodicity
+    And I fill in "periodicity" with not a valid periodicity
     When I press "saveButton"
     Then I should see "Error, periodicity is invalid"
 
