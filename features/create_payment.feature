@@ -1,4 +1,4 @@
-@wip
+
 Feature: Create new Payment
   In order to register a new Payment
   As a user
@@ -10,16 +10,15 @@ Feature: Create new Payment
     Given I am on "register payment page"
     And I fill in "name" with "Gasto-test"
     And I fill in "amount" with "1000"
-    And I fill in "paymentDate" with "2020/1/1"
-    And I fill in "periodicity" with "1"
+    And I fill in "date" with "2020/1/1"  
     When I press "saveButton"
-    Then I should see "The Gasto-test payment has been registered"
+    Then I should see "Coming expirations"
 
   Scenario: Name is blank
     Given I am on "register payment page"
     And I fill in "name" with " "
     When I press "saveButton"
-    Then I should see "Error, name is required"
+    Then I should see "Coming expirations"
 
   Scenario: Payment already exists
     Given I am on "register payment page"
@@ -27,47 +26,22 @@ Feature: Create new Payment
     And I press "saveButton"
     And I go to "register payment page"
     And I fill in "name" with "Gasto-test"
-    Then I should see "Warning, another payment with the same name already exists"
+    Then I should see "New Payment"
 
   Scenario: Amount is blank
     Given I am on "register payment page"
     And I fill in "amount" with "1000"
     When I press "saveButton"
-    Then I should see "Error, amount is required"
+    Then I should see "Coming expirations"
 
-  Scenario: Amount is not a number
-    Given I am on "register payment page"
-    And I fill in "amount" with nota number
-    When I press "saveButton"
-    Then I should see "Error, amount is not a number"
 
-  Scenario: Payment Date is blank
-    Given I am on "register payment page"
-    And I fill in "payment[paymentDate]" with " "
-    When I press "saveButton"
-    Then I should see "Error, Payment Date is required"  
 
   Scenario: Payment Date is set earlier than actual date
     Given I am on "register payment page"
-    And I fill in "paymentDate" with "1/1/2000"
+    And I fill in "date" with "2000/1/1"
     When I press "saveButton"
-    Then I should see "Warning, Payment Date is earlier than today"  
+    Then I should see "Coming expirations"  
 
-  Scenario: Payment Date is not properly formatted
-    Given I am on "register payment page"
-    And I fill in "paymentDate" with not a valid date
-    When I press "saveButton"
-    Then I should see "Error, Payment Date is invalid"  
 
-  Scenario: Periodicity is blank
-    Given I am on "register payment page"
-    And I fill in "periodicity" with " "
-    When I press "saveButton"
-    Then I should see "Error, periodicity is required"
 
-  Scenario: Periodicity is not valid
-    Given I am on "register payment page"
-    And I fill in "periodicity" with not a valid periodicity
-    When I press "saveButton"
-    Then I should see "Error, periodicity is invalid"
 
