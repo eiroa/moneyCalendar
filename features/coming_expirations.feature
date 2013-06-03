@@ -1,12 +1,11 @@
-@wip
 Feature: Coming expirations
   As a user
   I want to be able to view coming expirations
 
   Background:
-    Given i am logged in
+    Given there are not payments
     Given there is payment with name "Gasto-test0" and date "2015/11/30"
-    Given there is payment with name "Gasto-test1" and date "2014/02/30"
+    Given there is payment with name "Gasto-test1" and date "2014/01/30"
     Given there is payment with name "Gasto-test2" and date "2014/03/30"
     Given there is payment with name "Gasto-test3" and date "2014/10/30"
     Given there is payment with name "Gasto-test4" and date "2014/09/30"
@@ -30,5 +29,5 @@ Feature: Coming expirations
     Then I should see "Gasto-test4"
     Then I should see "Gasto-test3"
 
-    When I press "Add new spending button"
-    Then I should see "register payment page"
+    When I press "addNewPaymentButton"
+    Then I should see "Create a new Payment"

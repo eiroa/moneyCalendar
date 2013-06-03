@@ -8,8 +8,7 @@
 </head>
 
 <body align="center">
-  <h1>Money Calendar</h1>
-  <h2>Coming expirations</h2>
+  <h1>Coming expirations</h1>
 
   <table align="center" border="1">
     <tr>
@@ -20,17 +19,17 @@
       <td><#%= pay.expiry_date %></td> -->
       <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 
-      <% 10.times do |i| #pay = @payments.get(i)%>
+      <% @expirations.each do |pay| %>
         <tr>
-          <td><%="a_name_#{i}"%></td>
-          <td><%="a_expity_date_#{i}"%></td>
+          <td><%= pay.name %></td>
+          <td><%= pay.expiry_date.to_date %></td>
         </tr>
       <% end %>
     </tr>
   </table>
 
   <form action="new_spending" method="get">
-    <input type="submit" value="Add new spending">
+    <input type="submit" value="Add new payment" id="addNewPaymentButton" />
   </form>
 
 </body>

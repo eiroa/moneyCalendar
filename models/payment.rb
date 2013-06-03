@@ -7,4 +7,5 @@ class Payment
   property :amount, Integer
   property :expiry_date, DateTime
   property :periodicity, DateTime
+
 end
