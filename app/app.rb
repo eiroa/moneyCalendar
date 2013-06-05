@@ -37,6 +37,13 @@ module MoneyCalendar
         set_current_account(account)
         redirect "/coming_expirations"
     end
+    
+    # Access control
+    access_control.roles_for :any do |role|
+      role.protect "/coming_expirations"
+      role.protect "/save_payment"
+      role.protect "/new_spending"
+    end
 
     ##############################
     ##            APP
@@ -60,11 +67,14 @@ module MoneyCalendar
         
       redirect 'coming_expirations'
     end
-	
- 
 
     get '/new_spending' do
       render 'new_spending'
+    end
+    
+    get :logout do
+      set_current_account(nil)
+      redirect '/'
     end
 
     ##

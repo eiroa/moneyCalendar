@@ -6,6 +6,7 @@ migration 2, :create_payments do
       column :amount, Integer
       column :expiry_date, DateTime
       column :periodicity, DateTime
+      column :account_id, Integer
     end
   end
 
