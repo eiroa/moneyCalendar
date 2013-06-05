@@ -47,12 +47,12 @@ module MoneyCalendar
     end
 
     get '/coming_expirations' do
-      @expirations = SortPayments.getLast(10)
+      @expirations = SortPayments.getLast(10, current_account.id)
       render 'coming_expirations'
     end
     
     get '/save_payment' do
-      payment = Payment.new
+      payment = Payment.for_account(current_account)
       payment.name = params[:name]
       payment.amount = params[:amount]
       payment.expiry_date = params[:date]
