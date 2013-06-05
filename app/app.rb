@@ -42,8 +42,8 @@ module MoneyCalendar
     ##            APP
     ##############################
     get '/' do
-      #render 'home/index'
-      ' Coming Soon!! MoneyCalendar is still under development'
+      render 'home/index'
+      
     end
 
     get '/coming_expirations' do
@@ -57,9 +57,11 @@ module MoneyCalendar
       payment.amount = params[:amount]
       payment.expiry_date = params[:date]
       payment.save
-            
+        
       redirect 'coming_expirations'
     end
+	
+ 
 
     get '/new_spending' do
       render 'new_spending'
