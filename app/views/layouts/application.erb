@@ -35,7 +35,14 @@
       <a class="brand" href="../">Money Calendar</a>
       <div class="nav-collapse collapse" id="main-menu">
         <ul class="nav" id="main-menu-left" />
-        <ul class="nav pull-right" id="main-menu-right" />
+        
+        <ul class="nav pull-right" id="main-menu-right">
+          <li><a rel="tooltip" href="/" title="Inicio">Inicio</a></li>
+          <% if current_account %>
+          	<li><a rel="tooltip" href="/" title="Profile"><%= current_account.friendly_name %></a></li>
+          <% end %>
+        </ul>
+        
       </div>
     </div>
   </div>
