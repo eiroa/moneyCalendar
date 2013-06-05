@@ -10,23 +10,24 @@
 <body align="center">
   <h1>Coming expirations</h1>
 
-  <table align="center" border="1">
-    <tr>
-      <th>Spending Name</th>
-      <th>Expiry date</th>
-
-      <!-- <td><#%= pay.name %></td>
-      <td><#%= pay.expiry_date %></td> -->
-      <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
-
-      <% @expirations.each do |pay| %>
-        <tr>
-          <td><%= pay.name %></td>
-          <td><%= pay.expiry_date.to_date %></td>
-        </tr>
-      <% end %>
-    </tr>
-  </table>
+  <% if @expirations.empty? %>
+  	<p>You don't have upcoming expirations</p>
+  <% else %>
+	<table align="center" border="1">
+	  <tr>
+	    <th>Spending Name</th>
+	    <th>Expiry date</th>
+	
+	    <% @expirations.each do |pay| %>
+	      <tr>
+	        <td><%= pay.name %></td>
+	        <td><%= pay.expiry_date.to_date %></td>
+	        <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
+	      </tr>
+	    <% end %>
+	  </tr>
+	</table>
+  <% end %>
 
   <form action="new_spending" method="get">
     <input type="submit" value="Add new payment" id="addNewPaymentButton" />
