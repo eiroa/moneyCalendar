@@ -3,6 +3,7 @@ Feature: Coming expirations
   I want to be able to view coming expirations
 
   Background:
+  	Given I am logged in
     Given there are not payments
     Given there is payment with name "Gasto-test0" and date "2015/11/30"
     Given there is payment with name "Gasto-test1" and date "2014/01/30"

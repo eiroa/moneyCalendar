@@ -251,23 +251,6 @@ Then /^deberia ver "([^"]*)"$/ do |esperado|
     end
 end
 
-require 'date'
-
-#Given(/^there is payment with name "(.*?)" and date "(.*?)"$/) do |name, date|
-Given(/^there is payment with name "([^\"]*)" and date "([^\"]*)"$/) do |name, date|
-  p = Payment.new
-  p.name = name
-  p.expiry_date = Date.parse(date)
-  p.save
-end
-
-Given(/^there are not payments$/) do
-  Payment.destroy
-end
-
-
-
-
 
 
 

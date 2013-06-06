@@ -4,7 +4,9 @@ Feature: Create new Payment
   As a user
   I want to be able to register a payment
 
-  
+
+  Background:
+    Given I am logged in  
 
   Scenario: Happy Path
     Given I am on "register payment page"

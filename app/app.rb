@@ -4,14 +4,13 @@ module MoneyCalendar
     register Padrino::Mailer
     register Padrino::Helpers
     register Padrino::Admin::AccessControl
-    
-    set :protection, :except => [:json_csrf]
+
     enable :sessions
 
     ##############################
     ##        OmniAuth
     ##############################
-    configure :development, :travis do
+    configure :development, :travis, :test do
       use OmniAuth::Builder do
         provider :developer
       end

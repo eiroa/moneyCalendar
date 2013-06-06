@@ -1,0 +1,11 @@
+
+<form method='get' action='/auth/developer/callback' noValidate='noValidate'>
+	    <%= csrf_token_field %>
+
+<label for='name'>Name:</label>
+<input type='text' id='name' name='name' value="somebody"/>
+<label for='email'>Email:</label>
+<input type='text' id='email' name='email' value="somebody@someplace.com"/>
+<input type="submit" id="submit" name="submit" value="Sign In"/>      
+
+</form>
