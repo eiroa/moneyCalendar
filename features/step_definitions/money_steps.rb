@@ -23,3 +23,16 @@ When(/^I wait a while$/) do
   sleep(2)
 end
 
+Given(/^there are not payments_done$/) do
+  PaymentDone.destroy
+end
+
+Given(/^there is payment_done with name "([^\"]*)" and date "([^\"]*)" and amount "([^\"]*)"$/) do |name, date, amount|
+  Given %{there is payment with name "#{name}" and date "#{(Date.today + 1)}"}
+  
+  p = PaymentDone.for_payment(Payment.find_by_name(name))
+  p.date = Date.parse(date)
+  p.amount = amount
+  p.save
+end
+
