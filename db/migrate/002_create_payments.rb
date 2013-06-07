@@ -5,7 +5,8 @@ migration 2, :create_payments do
       column :name, String, :length => 255
       column :amount, Integer
       column :expiry_date, DateTime
-      column :periodicity, DateTime
+      column :periodicity, Integer
+      column :description, String, :length => 255
       column :account_id, Integer
     end
   end
