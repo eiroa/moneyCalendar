@@ -18,6 +18,7 @@
 			<tr>
 				<td>Name</td>
 				<td> <input type="text" name="name"> </td>
+
 			</tr>
 
 			<tr>
@@ -30,22 +31,17 @@
 				<td> <input type="date" name="date"> </td>
 			</tr>
 
-			<tr>
-				<td>Periodical?</td>
-				<td> <input type="checkbox" name="pValue" value="1"> </td>
-			</tr>
-
+			
 			<tr>
 				<td>Periodicity</td>
 				<td> <select name="periodicity">
-                	<OPTION VALUE="1w">1 Weeks</OPTION>
-					<OPTION VALUE="2w">2 Weeks</OPTION>
-					<OPTION VALUE="1m">1 Month</OPTION>
-					<OPTION VALUE="2m">2 Months</OPTION>
-					<OPTION VALUE="3m">3 Months</OPTION>
-					<OPTION VALUE="4m">4 Months</OPTION>
-                	<OPTION VALUE="6m">6 Months</OPTION>
-                	<OPTION VALUE="1y">1 Year</OPTION>
+                	                <OPTION VALUE="0">Single Payment</OPTION>
+					<OPTION VALUE="1">1 Month</OPTION>
+					<OPTION VALUE="2">2 Months</OPTION>
+					<OPTION VALUE="3">3 Months</OPTION>
+					<OPTION VALUE="4">4 Months</OPTION>
+                	                <OPTION VALUE="6">6 Months</OPTION>
+                	                <OPTION VALUE="12">1 Year</OPTION>
 				</select> </td>
 			</tr>
 
@@ -59,6 +55,18 @@
 			</tr>
 		</table>
 	</form>
+<% if @errorNameMissing != nil %>
+<h2 color="red" allign="center">Error, name is required</h1>
+<% end %>
+<% if @errorRepeated != nil %>
+<h2 color="red" allign="center">Error, another payment with the same name already exists</h1>
+<% end %>
+<% if @errorAmountMissing != nil %>
+<h2 color="red" allign="center">Error, amount is required</h1>
+<% end %>
+<% if @errorNameMissing != nil %>
+<h2 color="red" allign="center">Error, name is required</h1>
+<% end %>
 </body>
 </html>
 

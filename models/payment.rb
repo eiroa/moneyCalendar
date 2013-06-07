@@ -6,7 +6,8 @@ class Payment
   property :name, String
   property :amount, Integer
   property :expiry_date, DateTime
-  property :periodicity, DateTime
+  property :periodicity, Integer
+  property :description, String
   belongs_to :account
   
   def self.for_account(account)
@@ -15,4 +16,5 @@ class Payment
     payment
   end
 
+  
 end

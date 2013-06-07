@@ -58,13 +58,21 @@ module MoneyCalendar
     end
     
     get '/save_payment' do
-      payment = Payment.for_account(current_account)
-      payment.name = params[:name]
-      payment.amount = params[:amount]
-      payment.expiry_date = params[:date]
-      payment.save
-        
-      redirect 'coming_expirations'
+      @payment = Payment.for_account(current_account)
+       
+      @payment.name = params[:name]
+      @payment.amount = params[:amount]
+      @payment.expiry_date = params[:date]
+      
+      if @payment.name.empty?
+         @errorNameMissing = 'Error, name is required'
+         render 'new_spending'
+      else          
+         @payment.save
+         
+         render 'save_payment'
+      end  
+      
     end
 
     get '/new_spending' do
