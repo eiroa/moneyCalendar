@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe PaymentDone do
+describe Transaction do
 end
