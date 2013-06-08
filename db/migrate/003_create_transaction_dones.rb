@@ -6,7 +6,7 @@ migration 3, :create_transaction_dones do
       column :amount, Integer
       column :date, DateTime
       column :description, String, :length => 255
-      column :is_payment, Boolean
+      column :is_payment, "BOOLEAN"
     end
   end
 
