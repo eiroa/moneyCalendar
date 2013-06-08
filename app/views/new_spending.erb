@@ -55,17 +55,8 @@
 			</tr>
 		</table>
 	</form>
-<% if @errorNameMissing != nil %>
-<h2 color="red" allign="center">Error, name is required</h1>
-<% end %>
-<% if @errorRepeated != nil %>
-<h2 color="red" allign="center">Error, another payment with the same name already exists</h1>
-<% end %>
-<% if @errorAmountMissing != nil %>
-<h2 color="red" allign="center">Error, amount is required</h1>
-<% end %>
-<% if @errorNameMissing != nil %>
-<h2 color="red" allign="center">Error, name is required</h1>
+<% if @errorMessage != nil %>
+<h2 color="red" allign="center"><%=@errorMessage%></h1>
 <% end %>
 </body>
 </html>

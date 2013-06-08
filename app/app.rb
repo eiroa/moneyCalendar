@@ -63,15 +63,20 @@ module MoneyCalendar
       @payment.name = params[:name]
       @payment.amount = params[:amount]
       @payment.expiry_date = params[:date]
+      @payment.periodicity = params[:periodicity]
+      @payment.description = params[:description]
       
-      if @payment.name.empty?
-         @errorNameMissing = 'Error, name is required'
-         render 'new_spending'
-      else          
-         @payment.save
+      if !@payment.validate_fields
+         @errorMessage= @payment.getErrorMessage
+         render 'new_spending'  
          
+      else   
+        
+         @payment.save         
          render 'save_payment'
+         
       end  
+      
       
     end
 

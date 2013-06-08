@@ -1,0 +1,36 @@
+class Payment
+  include DataMapper::Resource
+
+  # property <name>, <type>
+  property :id, Serial
+  property :name, String
+  property :amount, Integer
+  property :expiry_date, DateTime
+  property :periodicity, Integer
+  property :description, String
+  belongs_to :account
+  
+  def self.for_account(account)
+    payment = Payment.new
+    payment.account = account
+    payment
+  end
+
+  def check_date
+    return (self.date >= Date.today) if self.date.is_a?(Date)
+    return false
+  end
+
+  def set_slug
+    self.slug = Event.generate_slug(self.name) if self.new?
+  end
+
+  def self.generate_slug(name, count = 1)
+    candidate_slug = name.gsub(' ', '')
+    candidate_slug = "#{candidate_slug}#{count}".downcase
+    count = Event.all(:slug => candidate_slug).count
+    return candidate_slug if count == 0
+    return generate_slug(name, count + 1)
+  end
+
+end

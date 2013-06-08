@@ -38,15 +38,15 @@ Feature: Create new Payment
 
   Scenario: Amount is blank
     Given I am on "register payment page"
-    And I fill in "amount" with "1000"
+    And I fill in "amount" with ""
     When I press "saveButton"
-    Then I should see "Error, amount is required"
+    Then I should see "Error, invalid amount"
 
   Scenario: Payment Date is set earlier than actual date
     Given I am on "register payment page"
-    And I fill in "date" with "2000/1/1"
+    And I fill in "date" with "2013/5/1"
     When I press "saveButton"
-    Then I should see "Error, Payment Date is earlier than today"  
+    Then I should see "Error, invalid date"
 
 
 
