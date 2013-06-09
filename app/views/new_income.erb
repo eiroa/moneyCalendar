@@ -10,11 +10,11 @@
 		<h1>Create a new Income</h1>
 		<br>
 
-		<h4>Please define the new payment</h4>
+		<h4>Please define the new Income</h4>
 		<br>
 
 		<form  action="save" method="get">
-			<input type="hidden" name="type" value="0">
+			
 			<table border="0" align = "center">
 				<tr>
 					<td>Name</td>
@@ -32,7 +32,7 @@
 				</tr>
 
 				<tr>
-					<td>Payment date</td>
+					<td>Incoming payment date</td>
 					<td>
 					<input type="date" name="date">
 					</td>
@@ -42,7 +42,7 @@
 					<td>Periodicity</td>
 					<td>
 					<select name="periodicity">
-						<OPTION VALUE="0">Single Payment</OPTION>
+						<OPTION VALUE="0">Single Income</OPTION>
 						<OPTION VALUE="1">1 Month</OPTION>
 						<OPTION VALUE="2">2 Months</OPTION>
 						<OPTION VALUE="3">3 Months</OPTION>
@@ -54,7 +54,7 @@
 
 				<tr>
 					<td>Description</td>
-					<td>					<textarea rows="4" name="description">Describe this payment here</textarea></td>
+					<td>					<textarea rows="4" name="description">Describe this income here</textarea></td>
 				</tr>
 
 				<tr>

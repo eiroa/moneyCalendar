@@ -1,17 +1,53 @@
 <div class="well">
-  <div class="centered">
-  	
-  	
-    <h1>New Payment details</h1>
-     <h2> The <%= @payment.name %> payment has been registered  </h2>
-    <p>Name: <%= @payment.name %></p>
-    <p>Amount: <%= @payment.amount %></p>
-    <p>PaymentDate: <%= @payment.expiry_date.to_date %></p>
-    <p>PaymentPeriodicity: <%= @payment.periodicity %></p>
-    <p>Description: <%= @payment.description %></p>
-    <form class="centered" method="get" action='/coming_expirations'>
-    <input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
-  </form>
-  </div>
+	<div class="centered">
+
+		<% if !@is_payment.nil? %>
+		<h1>New Payment details</h1>
+		<h2> The <%= @payment.name %> payment has been registered </h2>
+		<p>
+			Name: <%= @payment.name %>
+		</p>
+		<p>
+			Amount: <%= @payment.amount %>
+		</p>
+		<p>
+			PaymentDate: <%= @payment.expiry_date.to_date %>
+		</p>
+		<p>
+			PaymentPeriodicity: <%= @payment.periodicity %> months
+		</p>
+		<p>
+			Description: <%= @payment.description %>
+		</p>
+		<form class="centered" method="get" action='/coming_expirations'>
+			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
+		</form>
+		
+		<% else %>
+		<h1>New Income details</h1>
+		<h2> The <%= @income.name %> income has been registered </h2>
+		<p>
+			Name: <%= @income.name %>
+		</p>
+		<p>
+			Amount: <%= @income.amount %>
+		</p>
+		<p>
+			PaymentDate: <%= @income.expiry_date.to_date %>
+		</p>
+		<p>
+			PaymentPeriodicity: <%= @income.periodicity %>  months
+		</p>
+		<p>
+			Description: <%= @income.description %>
+		</p>
+		<form class="centered" method="get" action='/coming_expirations'>
+			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
+		</form>
+		
+		<% end %>
+		
+	</div>
 
 </div>
+

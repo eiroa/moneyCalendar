@@ -14,29 +14,29 @@ module MoneyCalendar
       use OmniAuth::Builder do
         provider :developer
       end
-      set :login_page, "/login"    
+      set :login_page, "/login"
       ENV['APP_URL'] = 'http://127.0.0.1:3000/'
     end
-    
+
     configure :staging, :production do
       use OmniAuth::Builder do
-        provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_SECRET_KEY'] 
+        provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_SECRET_KEY']
       end
-      set :login_page, "/auth/twitter"    
+      set :login_page, "/auth/twitter"
     end
-    
+
     get :login do
       render '/home/login'
     end
 
     get :auth, :map => '/auth/:provider/callback' do
-        auth    = request.env["omniauth.auth"]
-        account = Account.find_by_provider_and_uid(auth["provider"], auth["uid"]) || 
-                Account.create_with_omniauth(auth)
-        set_current_account(account)
-        redirect "/coming_expirations"
+      auth    = request.env["omniauth.auth"]
+      account = Account.find_by_provider_and_uid(auth["provider"], auth["uid"]) ||
+      Account.create_with_omniauth(auth)
+      set_current_account(account)
+      redirect "/coming_expirations"
     end
-    
+
     # Access control
     access_control.roles_for :any do |role|
       role.protect "/coming_expirations"
@@ -49,45 +49,67 @@ module MoneyCalendar
     ##############################
     get '/' do
       render 'home/index'
-      
+
     end
 
     get '/coming_expirations' do
       @expirations = SortPayments.getLast(10, current_account.id)
       render 'coming_expirations'
     end
-    
+
     get '/save' do
-      
-      @payment = Transaction.payment_for_account(current_account)
-       
-      @payment.name = params[:name]
-      @payment.amount = params[:amount]
-      @payment.expiry_date = params[:date]
-      @payment.periodicity = params[:periodicity]
-      @payment.description = params[:description]
-      
-      if !@payment.validate_fields
-         @errorMessage= @payment.getErrorMessage
-         render 'new_spending'  
-         
-      else   
-        
-         @payment.save         
-         render 'save'
-         
-      end  
-      
-      
+      @is_payment = params[:is_payment]
+      if @is_payment != nil
+        @payment = Transaction.payment_for_account(current_account)
+
+        @payment.name = params[:name]
+        @payment.amount = params[:amount]
+        @payment.expiry_date = params[:date]
+        @payment.periodicity = params[:periodicity]
+        @payment.description = params[:description]
+
+        if !@payment.validate_fields
+          @errorMessage= @payment.getErrorMessage
+          render 'new_spending'
+
+        else
+          
+          @payment.save
+          render 'save'
+
+        end
+
+      else
+        @income = Transaction.income_for_account(current_account)
+
+        @income.name = params[:name]
+        @income.amount = params[:amount]
+        @income.expiry_date = params[:date]
+        @income.periodicity = params[:periodicity]
+        @income.description = params[:description]
+
+        if !@income.validate_fields
+          @errorMessage= @income.getErrorMessage
+          render 'new_income'
+
+        else
+          
+          @income.save
+          render 'save'
+
+        end
+      end
+
     end
 
     get '/new_spending' do
       render 'new_spending'
     end
-    
+
     get '/new_income' do
       render 'new_income'
     end
+
         
     get :payments_stats do
       @stats = TransactionDone.payments_from_to(params[:from_date], params[:to_date])
@@ -95,6 +117,7 @@ module MoneyCalendar
       render 'payments_stats'
     end
     
+
     get :logout do
       set_current_account(nil)
       redirect '/'
@@ -143,13 +166,14 @@ module MoneyCalendar
     ##
     # You can manage errors like:
     #
-       error 404 do
-         'Service not Found! :('
-       end
-    #
-    #   error 505 do
-    #     render 'errors/505'
-    #   end
-    #
+    error 404 do
+      'Service not Found! :('
+    end
+  #
+  #   error 505 do
+  #     render 'errors/505'
+  #   end
+  #
   end
 end
+
