@@ -23,13 +23,14 @@ When(/^I wait a while$/) do
 end
 
 Given(/^there are not payments_done$/) do
-  PaymentDone.destroy
+  TransactionDone.destroy
 end
 
 Given(/^there is payment_done with name "([^\"]*)" and date "([^\"]*)" and amount "([^\"]*)"$/) do |name, date, amount|
-  Given %{there is payment with name "#{name}" and date "#{(Date.today + 1)}"}
+  step %{there is payment with name "#{name}" and date "#{(Date.today + 1)}"}
   
-  p = TransactionDone.for_payment(Transaction.find_payment_by_name(name))
+  p = TransactionDone.for_transaction(Transaction.find_by_name(name))
+  p.name = name
   p.date = Date.parse(date)
   p.amount = amount
   p.is_payment = true

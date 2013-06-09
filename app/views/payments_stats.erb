@@ -21,14 +21,17 @@
 	
 	    <% @stats.each do |s| %>
 	      <tr>
-	        <td><%= s.name %></td>
-	        <td><%= s.expiry_date.to_date %></td>
-	        <td><%= "$ #{s.amount}" %></td>
+	        <td><%= s.get_name %></td>
+	        <td><%="$#{s.amount}"%></td>
+	        <td><%= s.date.to_date %></td>
 	        <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 	      </tr>
 	    <% end %>
+	    
 	  </tr>
 	</table>
+	
+	<p>Total: $<%= @total %></p>
   <% end %>
 
   <form action="coming_expirations" method="get">
@@ -37,8 +40,8 @@
   
   <form action="payments_stats" method="get" id="stats">
   	<p>View how many payments I did in a given period of time</p>
-  	From date <input type="date" id="stats[from_date]" name="stats[from_date]" />
-  	To date <input type="date" id="stats[to_date]" name="stats[to_date]" />
+  	From date <input type="date" id="from_date" name="from_date" />
+  	To date <input type="date" id="to_date" name="to_date" />
     <input type="submit" value="View stats" id="viewPaymentsStatsButton" />
   </form>
 

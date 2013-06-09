@@ -90,7 +90,8 @@ module MoneyCalendar
     end
         
     get :payments_stats do
-      @stats = []
+      @stats = TransactionDone.payments_from_to(params[:from_date], params[:to_date])
+      @total = @stats.sum(:amount)
       render 'payments_stats'
     end
     

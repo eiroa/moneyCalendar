@@ -7,6 +7,7 @@ migration 3, :create_transaction_dones do
       column :date, DateTime
       column :description, String, :length => 255
       column :is_payment, "BOOLEAN"
+      column :transaction_id, Integer
     end
   end
 
