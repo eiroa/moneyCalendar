@@ -1,4 +1,5 @@
 class SortPayments
+  #sort
   def self.getLast(cant, account_id)
     payments = Transaction.all(:account_id => account_id)
       .all(:is_payment => true)
