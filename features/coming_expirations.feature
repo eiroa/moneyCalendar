@@ -1,4 +1,4 @@
-@wip
+
 Feature: Coming expirations
   As a user
   I want to be able to view coming expirations

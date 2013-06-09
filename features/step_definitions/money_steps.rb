@@ -10,7 +10,7 @@ Given(/^there is payment with name "([^\"]*)" and date "([^\"]*)"$/) do |name, d
 end
 
 Given(/^there are not payments$/) do
-  Payment.destroy
+  Transaction.destroy
 end
 
 Given(/^I am logged in$/) do

@@ -10,17 +10,18 @@ class Transaction
   property :description, String
   property :is_payment, Boolean
   belongs_to :account
+  
   def self.payment_for_account(account)
     payment = Transaction.new
     payment.account = account
-    payment.is_payment =true
+    payment.is_payment = true
     payment
   end
   
   def self.income_for_account(account)
     income = Transaction.new
     income.account = account
-    income.is_payment =false
+    income.is_payment = false
     income
   end
 
