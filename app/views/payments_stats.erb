@@ -8,20 +8,22 @@
 </head>
 
 <body align="center">
-  <h1>Coming expirations</h1>
+  <h1>Payments Statistics</h1>
 
-  <% if @expirations.empty? %>
-  	<p>You don't have upcoming expirations</p>
+  <% if @stats.empty? %>
+  	<p>You don't have payments done in this period</p>
   <% else %>
 	<table align="center" border="1">
 	  <tr>
 	    <th>Spending Name</th>
-	    <th>Expiry date</th>
+	    <th>Amount</th>
+	    <th>Date</th>
 	
-	    <% @expirations.each do |pay| %>
+	    <% @stats.each do |s| %>
 	      <tr>
-	        <td><%= pay.name %></td>
-	        <td><%= pay.expiry_date.to_date %></td>
+	        <td><%= s.name %></td>
+	        <td><%= s.expiry_date.to_date %></td>
+	        <td><%= "$ #{s.amount}" %></td>
 	        <!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 	      </tr>
 	    <% end %>
@@ -29,8 +31,8 @@
 	</table>
   <% end %>
 
-  <form action="new_spending" method="get">
-    <input type="submit" value="Add new payment" id="addNewPaymentButton" />
+  <form action="coming_expirations" method="get">
+    <input type="submit" value="Return" id="returnButton" />
   </form>
   
   <form action="payments_stats" method="get" id="stats">

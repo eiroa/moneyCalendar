@@ -1,12 +1,10 @@
 require 'date'
 
-#Given(/^there is payment with name "(.*?)" and date "(.*?)"$/) do |name, date|
 Given(/^there is payment with name "([^\"]*)" and date "([^\"]*)"$/) do |name, date|
   p = Transaction.payment_for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
   p.expiry_date = Date.parse(date)
   p.save
-  p = Transaction.payment_for_account(Account.find_by_uid("cucumber_user@someplace.com"))
 end
 
 Given(/^there are not payments$/) do

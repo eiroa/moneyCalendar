@@ -84,6 +84,11 @@ module MoneyCalendar
       render 'new_spending'
     end
     
+    get :payments_stats do
+      @stats = []
+      render 'payments_stats'
+    end
+    
     get :logout do
       set_current_account(nil)
       redirect '/'
