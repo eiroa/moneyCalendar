@@ -46,6 +46,7 @@ Feature: Create new Payment
   Scenario: Payment Date is set earlier than actual date
     Given I am on "register income page"
     And I fill in "name" with "Gasto-test"
+    And I select "1 Month" from "periodicity"
     And I fill in with a previous date than today "date"
     When I press "saveButton"
     Then I should see "Error, invalid date"  

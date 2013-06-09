@@ -27,8 +27,11 @@ class Transaction
 
   def check_date
     if self.expiry_date.is_a?(Date)
-      return self.expiry_date >= Date.today
-
+      if self.periodicity >0
+         return self.expiry_date >= Date.today
+      else
+         return true
+      end 
     else
     return false
 
