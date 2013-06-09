@@ -73,12 +73,19 @@ module MoneyCalendar
           render 'new_spending'
 
         else
+
+          repeated = Transaction.first(:name => @payment.name, :is_payment =>true)
+          if repeated == nil
+            @payment.save
+            render 'save'
+          else
+            @errorMessage= 'Error, another payment with the same name already exists'
+            render 'new_spending'
+          end
           
-          @payment.save
-          render 'save'
 
         end
-
+    #############################
       else
         @income = Transaction.income_for_account(current_account)
 
@@ -93,11 +100,20 @@ module MoneyCalendar
           render 'new_income'
 
         else
-          
-          @income.save
-          render 'save'
 
+          repeated = Transaction.first(:name => @income.name, :is_payment =>false)
+          if repeated == nil
+            @income.save
+            render 'save'
+          else
+            @errorMessage= 'Error, another income with the same name already exists'
+            render 'new_income'
+          end
+          
+          
         end
+        
+        
       end
 
     end

@@ -7,6 +7,8 @@
 
 require 'uri'
 require 'cgi'
+require 'date'
+
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "support", "paths"))
 
 module WithinHelpers
@@ -41,6 +43,16 @@ When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"(?: within "([^\"]*)")?$/ do |fi
     fill_in(field, :with => value)
   end
 end
+
+When /^(?:|I )fill in with a previous date than today "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, selector|
+  
+  with_scope(selector) do
+   
+    fill_in(field, :with => (Date.today-1))
+  end
+end
+
+
 
 When /^(?:|I )fill in "([^\"]*)" for "([^\"]*)"(?: within "([^\"]*)")?$/ do |value, field, selector|
   with_scope(selector) do
