@@ -40,8 +40,11 @@ module MoneyCalendar
     # Access control
     access_control.roles_for :any do |role|
       role.protect "/coming_expirations"
-      role.protect "/save_payment"
+      role.protect "/save"
       role.protect "/new_spending"
+      role.protect "/new_income"
+      role.protect "/incomes_stats"
+      role.protect "/payments_stats"
     end
 
     ##############################
@@ -165,7 +168,12 @@ module MoneyCalendar
       render 'payments_stats'
     end
     
-
+    get :incomes_stats do
+      @stats = TransactionDone.incomes_from_to(params[:incomes_from_date], params[:incomes_to_date])
+      @total = @stats.sum(:amount)
+      render 'incomes_stats'
+    end
+    
     get :logout do
       set_current_account(nil)
       redirect '/'

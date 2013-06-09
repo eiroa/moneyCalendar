@@ -25,6 +25,10 @@ class TransactionDone
     return TransactionDone.from_to(from_date, to_date).all(:is_payment => true)
   end
   
+   def self.incomes_from_to(from_date, to_date)
+    return TransactionDone.from_to(from_date, to_date).all(:is_payment => false)
+  end
+  
   def self.from_to(from_date, to_date)
     return TransactionDone.all(:date.gt => from_date, :date.lt => to_date)
   end

@@ -3,19 +3,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Payment Stats - Money Calendar</title>
+  <title>Income stats - Money Calendar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body align="center">
-  <h1>Payments Statistics</h1>
+  <h1>Income Statistics</h1>
 
   <% if @stats.empty? %>
-  	<p>You don't have payments done in this period</p>
+  	<p>You didn't received any incomes in this period</p>
   <% else %>
 	<table align="center" border="1">
 	  <tr>
-	    <th>Spending Name</th>
+	    <th>Income Name</th>
 	    <th>Amount</th>
 	    <th>Date</th>
 	
@@ -38,11 +38,11 @@
     <input type="submit" value="Return" id="returnButton" />
   </form>
   
-  <form action="payments_stats" method="get" id="stats">
-  	<p>View how many payments I did in a given period of time</p>
-  	From date <input type="date" id="from_date" name="from_date" />
-  	To date <input type="date" id="to_date" name="to_date" />
-    <input type="submit" value="View stats" id="viewPaymentsStatsButton" />
+  <form action="incomes_stats" method="get" id="stats">
+  	<p>View how many incomes I received in a given period of time</p>
+  	From date <input type="date" id="incomes_from_date" name="from_date" />
+  	To date <input type="date" id="incomes_to_date" name="to_date" />
+    <input type="submit" value="View stats" id="viewIncomeStatsButton" />
   </form>
 
 </body>
