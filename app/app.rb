@@ -57,8 +57,9 @@ module MoneyCalendar
       render 'coming_expirations'
     end
     
-    get '/save_payment' do
-      @payment = Payment.for_account(current_account)
+    get '/save' do
+      
+      @payment = Transaction.payment_for_account(current_account)
        
       @payment.name = params[:name]
       @payment.amount = params[:amount]
@@ -73,7 +74,7 @@ module MoneyCalendar
       else   
         
          @payment.save         
-         render 'save_payment'
+         render 'save'
          
       end  
       
@@ -82,6 +83,10 @@ module MoneyCalendar
 
     get '/new_spending' do
       render 'new_spending'
+    end
+    
+    get '/new_income' do
+      render 'new_income'
     end
     
     get :logout do
@@ -132,9 +137,9 @@ module MoneyCalendar
     ##
     # You can manage errors like:
     #
-    #   error 404 do
-    #     render 'errors/404'
-    #   end
+       error 404 do
+         'Service not Found! :('
+       end
     #
     #   error 505 do
     #     render 'errors/505'
