@@ -7,6 +7,7 @@ migration 4, :create_transactions do
       column :expiry_date, DateTime
       column :periodicity, Integer
       column :description, String, :length => 255
+      column :is_payment, "BOOLEAN"
     end
   end
 
