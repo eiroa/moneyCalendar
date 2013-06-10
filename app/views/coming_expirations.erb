@@ -3,20 +3,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Coming expirations - Money Calendar</title>
+  <title>Upcoming payments - Money Calendar</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body align="center">
-  <h1>Coming expirations</h1>
+  <h1>Upcoming payments</h1>
 
   <% if @expirations.empty? %>
-  	<p>You don't have upcoming expirations</p>
+  	<p>You don't have upcoming payments</p>
   <% else %>
 	<table align="center" border="1">
 	  <tr>
-	    <th>Spending Name</th>
-	    <th>Expiry date</th>
+	    <th>Payment name</th>
+	    <th>Payment date</th>
 	
 	    <% @expirations.each do |pay| %>
 	      <tr>

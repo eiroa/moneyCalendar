@@ -10,7 +10,7 @@ Feature: Coming expirations
   Scenario: There are not payments
   	Given there are not payments
   	And I am on "coming expirations page"
-  	Then I should see "You don't have upcoming expirations"
+  	Then I should see "You don't have upcoming payments"
   
   Scenario: There are less than 10 payments
   	Given there is payment with name "Gasto-test0" and date "2015/11/30"

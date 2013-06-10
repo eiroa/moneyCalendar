@@ -42,6 +42,9 @@
           <% if current_account %>
           	<li><a rel="tooltip" href="/" title="Profile"><%= current_account.friendly_name %></a></li>
           	<li><a rel="tooltip" href="/logout" title="Logout">Log out</a></li>
+          	<li><a allign="right" rel="tooltip" href="/coming_expirations" title="Check your upcoming payments">Upcoming Payments</a></li>
+          	<% else %>
+          	<li><a rel="tooltip" href="/login" title="Login">Login</a></li>
           <% end %>
         </ul>
         
