@@ -10,7 +10,7 @@ module MoneyCalendar
     ##############################
     ##        OmniAuth
     ##############################
-    configure :development, :travis, :test do
+    configure  :development,:travis, :test do
       use OmniAuth::Builder do
         provider :developer
       end
@@ -18,7 +18,7 @@ module MoneyCalendar
       ENV['APP_URL'] = 'http://127.0.0.1:3000/'
     end
 
-    configure :staging, :production do
+    configure  :staging, :production do
       use OmniAuth::Builder do
         provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_SECRET_KEY']
       end
@@ -40,11 +40,8 @@ module MoneyCalendar
     # Access control
     access_control.roles_for :any do |role|
       role.protect "/coming_expirations"
-      role.protect "/save"
+      role.protect "/save_payment"
       role.protect "/new_spending"
-      role.protect "/new_income"
-      role.protect "/incomes_stats"
-      role.protect "/payments_stats"
     end
 
     ##############################
@@ -173,7 +170,7 @@ module MoneyCalendar
       @total = @stats.sum(:amount)
       render 'incomes_stats'
     end
-    
+
     get :logout do
       set_current_account(nil)
       redirect '/'
