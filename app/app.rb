@@ -45,7 +45,7 @@ module MoneyCalendar
     end
 
     ##############################
-    ##            APP 
+    ##            APP
     ##############################
     get '/' do
       render 'home/index'
@@ -59,23 +59,19 @@ module MoneyCalendar
 
     get '/save' do
       @is_payment = params[:is_payment]
-      
+
       begin
         @transaction = Transaction.create(current_account, @is_payment, params[:periodicity],
           params[:name], params[:amount], params[:date],
           params[:description])
-          
+
         @transaction.save
         render 'save'
-        
-      rescue TransactionError => te
-        @errorMessage = te.message
-        render 'new_spending'
-      rescue TransactionRepeated
-        @errorMessage = "Error, another transaction with the same name already exists"
+
+      rescue TransactionError, TransactionRepeated => e
+        @errorMessage = e.message
         render 'new_spending'
       end
-      
     end
 
     get '/new_spending' do
@@ -86,13 +82,12 @@ module MoneyCalendar
       render 'new_income'
     end
 
-        
     get :payments_stats do
       @stats = TransactionDone.payments_from_to(params[:from_date], params[:to_date])
       @total = @stats.sum(:amount)
       render 'payments_stats'
     end
-    
+
     get :incomes_stats do
       @stats = TransactionDone.incomes_from_to(params[:incomes_from_date], params[:incomes_to_date])
       @total = @stats.sum(:amount)
