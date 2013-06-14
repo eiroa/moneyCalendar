@@ -1,4 +1,4 @@
-@wip
+
 Feature: Statistics of payments
   As a user
   I want to be able to view how many payments I did in a given period of time

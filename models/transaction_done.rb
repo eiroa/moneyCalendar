@@ -8,7 +8,7 @@ class TransactionDone
   property :date, DateTime
   property :description, String
   property :is_payment, Boolean
-  belongs_to :transaction
+  property :transaction_id, Integer
   belongs_to :account
   
   def get_name
