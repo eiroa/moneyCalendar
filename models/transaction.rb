@@ -17,6 +17,13 @@ class Transaction
     t
   end
   
+  # Return "cant" transactions sorted by expiry_date
+  def self.get_last_sorted(cant, account_id)
+    payments = Transaction.all(:account_id => account_id, :is_payment => true, :expiry_date.gte => Date.today)
+    return (payments.sort! { |a,b| a.expiry_date <=> b.expiry_date })[0..cant-1]
+  end
+  
+  # Returns a payment with "account" 
   def self.payment_for_account(account)
     payment = Transaction.new
     payment.account = account
@@ -24,6 +31,7 @@ class Transaction
     payment
   end
 
+  # Returns an income with "account" 
   def self.income_for_account(account)
     income = Transaction.new
     income.account = account

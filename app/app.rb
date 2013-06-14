@@ -53,7 +53,7 @@ module MoneyCalendar
     end
 
     get '/coming_expirations' do
-      @expirations = SortPayments.getLast(10, current_account.id)
+      @expirations = Transaction.get_last_sorted(10, current_account.id)
       render 'coming_expirations'
     end
 

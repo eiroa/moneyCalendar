@@ -1,7 +1,67 @@
 require 'spec_helper'
 
 describe Transaction do
-
+  
+  describe 'get_last_sorted' do
+    it 'should return [] if there are no transactions' do
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([])
+      
+      result = Transaction.get_last_sorted(10, 1)
+      result.should eq []
+    end
+    
+    it 'should return all transactions if there are less transactions than the ones requested' do
+      t = Transaction.new
+      t.expiry_date = Date.today + 2
+      
+      t2 = Transaction.new
+      t2.expiry_date = Date.today + 1
+      
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+        t, t2
+      ])
+      
+      result = Transaction.get_last_sorted(10, 1)
+      result.should eq [t2, t]
+    end
+    
+    it 'should return all transactions if i request the same quantity than the ones registered' do
+      t = Transaction.new
+      t.expiry_date = Date.today + 2
+      
+      t2 = Transaction.new
+      t2.expiry_date = Date.today + 1
+      
+      t3 = Transaction.new
+      t3.expiry_date = Date.today + 3
+      
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+        t, t2, t3
+      ])
+      
+      result = Transaction.get_last_sorted(3, 1)
+      result.should eq [t2, t, t3]
+    end
+    
+    it 'should return the requested quantity of transactions if there are already more transactions registered' do
+      t = Transaction.new
+      t.expiry_date = Date.today + 2
+      
+      t2 = Transaction.new
+      t2.expiry_date = Date.today + 1
+      
+      t3 = Transaction.new
+      t3.expiry_date = Date.today + 3
+      
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+        t, t2, t3
+      ])
+      
+      result = Transaction.get_last_sorted(2, 1)
+      result.should eq [t2, t]
+    end
+  end
+  
   describe 'check_date' do
 
     it 'should return false if expiry_date is before today and not Single Periodicity' do
