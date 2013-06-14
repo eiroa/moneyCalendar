@@ -10,20 +10,19 @@ class Transaction
   property :description, String
   property :is_payment, Boolean
   belongs_to :account
-  
   def self.for_account(account)
     t = Transaction.new
     t.account = account
     t
   end
-  
+
   # Return "cant" transactions sorted by expiry_date
   def self.get_last_sorted(cant, account_id)
     payments = Transaction.all(:account_id => account_id, :is_payment => true, :expiry_date.gte => Date.today)
     return (payments.sort! { |a,b| a.expiry_date <=> b.expiry_date })[0..cant-1]
   end
-  
-  # Returns a payment with "account" 
+
+  # Returns a payment with "account"
   def self.payment_for_account(account)
     payment = Transaction.new
     payment.account = account
@@ -31,7 +30,7 @@ class Transaction
     payment
   end
 
-  # Returns an income with "account" 
+  # Returns an income with "account"
   def self.income_for_account(account)
     income = Transaction.new
     income.account = account
@@ -45,26 +44,23 @@ class Transaction
 
     if @period.eql?('0')
       transaction = TransactionDone.for_account(current_account)
-      transaction.name = name
-      transaction.amount = amount
       transaction.date = date
-      transaction.is_payment = is_payment
-      transaction.description = description
     else
       repeated = Transaction.all(:account_id => current_account.id)
         .first(:name => name, :is_payment => is_payment)
-      
+
       raise TransactionRepeated if repeated != nil
-      
+
       transaction = Transaction.for_account(current_account)
-      transaction.name = name
-      transaction.amount = amount
       transaction.expiry_date = date
       transaction.periodicity = periodicity
-      transaction.is_payment = is_payment
-      transaction.description = description
     end
-    
+
+    transaction.name = name
+    transaction.amount = amount
+    transaction.is_payment = is_payment
+    transaction.description = description
+
     raise TransactionError.new(transaction.get_error_message) if !transaction.validate_fields
     return transaction
   end
@@ -74,7 +70,7 @@ class Transaction
   end
 
   def check_amount
-    return (self.amount.is_a?(Float)) && (amount > 0) 
+    return (self.amount.is_a?(Float)) && (amount > 0)
   end
 
   def check_name
