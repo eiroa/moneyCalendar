@@ -1,23 +1,23 @@
 <div class="well">
 	<div class="centered">
 
-		<% if !@is_payment.nil? %>
+		<% if @is_payment.eql?('1') %>
 		<h1>New Payment details</h1>
-		<h2> The <%= @payment.name %> payment has been registered </h2>
+		<h2> The <%= @transaction.name %> payment has been registered </h2>
 		<p>
-			Name: <%= @payment.name %>
+			Name: <%= @transaction.name %>
 		</p>
 		<p>
-			Amount: <%= @payment.amount %>
+			Amount: <%= @transaction.amount %>
 		</p>
 		<p>
-			PaymentDate: <%= @payment.expiry_date.to_date %>
+			PaymentDate: <%= @transaction.expiry_date.to_date %>
 		</p>
 		<p>
-			PaymentPeriodicity: <%= @payment.periodicity %> months
+			PaymentPeriodicity: <%= @transaction.periodicity %> months
 		</p>
 		<p>
-			Description: <%= @payment.description %>
+			Description: <%= @transaction.description %>
 		</p>
 		<form class="centered" method="get" action='/coming_expirations'>
 			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
@@ -25,21 +25,21 @@
 		
 		<% else %>
 		<h1>New Income details</h1>
-		<h2> The <%= @income.name %> income has been registered </h2>
+		<h2> The <%= @transaction.name %> income has been registered </h2>
 		<p>
-			Name: <%= @income.name %>
+			Name: <%= @transaction.name %>
 		</p>
 		<p>
-			Amount: <%= @income.amount %>
+			Amount: <%= @transaction.amount %>
 		</p>
 		<p>
-			PaymentDate: <%= @income.expiry_date.to_date %>
+			PaymentDate: <%= @transaction.expiry_date.to_date %>
 		</p>
 		<p>
-			PaymentPeriodicity: <%= @income.periodicity %>  months
+			PaymentPeriodicity: <%= @transaction.periodicity %>  months
 		</p>
 		<p>
-			Description: <%= @income.description %>
+			Description: <%= @transaction.description %>
 		</p>
 		<form class="centered" method="get" action='/coming_expirations'>
 			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />

@@ -59,95 +59,23 @@ module MoneyCalendar
 
     get '/save' do
       @is_payment = params[:is_payment]
-      @period = params[:periodicity]
-      if @is_payment != nil
+      
+      begin
+        @transaction = Transaction.create(current_account, @is_payment, params[:periodicity],
+          params[:name], params[:amount], params[:date],
+          params[:description])
+          
+        @transaction.save
+        render 'save'
         
-        @payment = Transaction.payment_for_account(current_account)
-
-        @payment.name = params[:name]
-        @payment.amount = params[:amount]
-        @payment.expiry_date = params[:date]
-        @payment.periodicity = @period
-        @payment.description = params[:description]
-
-        if !@payment.validate_fields
-           @errorMessage= @payment.getErrorMessage
-           render 'new_spending'
-
-        else
-
-          repeated = Transaction.all(:account_id => current_account.id)
-          .first(:name => @payment.name, :is_payment =>true)
-          
-          if repeated == nil
-            if @period.eql?('0') 
-              
-              @paymentDone = TransactionDone.for_transaction(@payment)
-              @paymentDone.date = @payment.expiry_date
-              @paymentDone.name = @payment.name
-              @paymentDone.amount = @payment.amount
-              @paymentDone.is_payment = true;
-              @paymentDone.description = @payment.description;
-              @paymentDone.save
-              render 'save'
-            else
-              
-              @payment.save
-              render 'save'
-            end
-            
-          else
-            @errorMessage= 'Error, another payment with the same name already exists'
-            render 'new_spending'
-          end
-          
-
-        end
-    #############################
-      else
-        @income = Transaction.income_for_account(current_account)
-
-        @income.name = params[:name]
-        @income.amount = params[:amount]
-        @income.expiry_date =  params[:date]
-        @income.periodicity = @period
-        @income.description = params[:description]
-
-        if !@income.validate_fields
-          @errorMessage= @income.getErrorMessage
-          render 'new_income'
-
-        else
-
-          repeated = Transaction.all(:account_id => current_account.id)
-          .first(:name => @income.name, :is_payment =>false)
-          if repeated == nil
-            if @period.eql?('0') 
-              
-              @incomeDone = TransactionDone.for_transaction(@income)
-              @incomeDone.date = @income.expiry_date
-              @incomeDone.name = @income.name
-              @incomeDone.amount = @income.amount
-              @incomeDone.is_payment = false;
-              @incomeDone.description = @income.description;
-              @incomeDone.save
-              render 'save'
-            else
-              
-              @income.save
-              render 'save'
-            end
-          else
-            @errorMessage= 'Error, another income with the same name already exists'
-            render 'new_income'
-          end
-          
-          
-        end
-        
-        
+      rescue TransactionError => te
+        @errorMessage = te.message
+        render 'new_spending'
+      rescue TransactionRepeated
+        @errorMessage = "Error, another transaction with the same name already exists"
+        render 'new_spending'
       end
-
+      
     end
 
     get '/new_spending' do

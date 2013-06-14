@@ -5,7 +5,7 @@ Feature: Coming expirations
 
   Background:
   	Given I am logged in
-    Given there are not payments
+    Given there are not transactions
 
   Scenario: There are not payments
   	Given there are not payments

@@ -18,6 +18,10 @@ Given(/^there are not payments$/) do
   Transaction.destroy
 end
 
+Given(/^there are not transactions$/) do
+  Transaction.destroy
+end
+
 Given(/^I am logged in$/) do
   visit "/login"
   fill_in("name", :with => "cucumber_user")
@@ -40,7 +44,7 @@ end
 Given(/^there is payment_done with name "([^\"]*)" and date "([^\"]*)" and amount "([^\"]*)"$/) do |name, date, amount|
   step %{there is payment with name "#{name}" and date "#{(Date.today + 1)}"}
   
-  p = TransactionDone.for_transaction(Transaction.find_by_name(name))
+  p = TransactionDone.for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
   p.date = Date.parse(date)
   p.amount = amount
@@ -51,7 +55,7 @@ end
 Given(/^there is income_received with name "([^\"]*)" and date "([^\"]*)" and amount "([^\"]*)"$/) do |name, date, amount|
   step %{there is income with name "#{name}" and date "#{(Date.today + 1)}"}
   
-  p = TransactionDone.for_transaction(Transaction.find_by_name(name))
+  p = TransactionDone.for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
   p.date = Date.parse(date)
   p.amount = amount

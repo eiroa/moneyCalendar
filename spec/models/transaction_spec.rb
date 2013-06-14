@@ -11,14 +11,6 @@ describe Transaction do
       payment1.periodicity =1;
       payment1.check_date.should be false
     end
-    
-    it 'should return true if expiry_date is before today and Single periodicity' do
-      payment1 = Transaction.new
-      payment1.name ='my payment'
-      payment1.expiry_date = Date.today-1
-      payment1.periodicity =0;
-      payment1.check_date.should be true
-    end
 
     it 'should return true if expiry_date is today and not single' do
       payment1 = Transaction.new
@@ -27,7 +19,7 @@ describe Transaction do
       payment1.periodicity =1;
       payment1.check_date.should be true
     end
-    
+
     it 'should return true if expiry_date is today and single periodicity' do
       payment1 = Transaction.new
       payment1.name ='my payment'
@@ -117,14 +109,14 @@ describe Transaction do
 
     it 'should return "Error, name is required" if name is blank' do
       payment1 = Transaction.new
-      payment1.getErrorMessage.should eq "Error, name is required"
+      payment1.get_error_message.should eq "Error, name is required"
     end
 
     it 'should return "Error, invalid date" if payment date is invalid' do
       payment1 = Transaction.new
       payment1.name = "payment"
       payment1.expiry_date= "pepe"
-      payment1.getErrorMessage.should eq "Error, invalid date"
+      payment1.get_error_message.should eq "Error, invalid date"
     end
 
     it 'should return "Error, invalid amount" if amount is invalid' do
@@ -133,7 +125,7 @@ describe Transaction do
       payment1.expiry_date= Date.today
       payment1.periodicity = 1;
       payment1.amount = -1
-      payment1.getErrorMessage.should eq "Error, invalid amount"
+      payment1.get_error_message.should eq "Error, invalid amount"
     end
 
     it 'should return "Error, invalid periodicity" if periodicity is invalid' do
@@ -142,7 +134,7 @@ describe Transaction do
       payment1.expiry_date= Date.today
       payment1.amount = 100
       payment1.periodicity = -1.4
-      payment1.getErrorMessage.should eq "Error, invalid periodicity"
+      payment1.get_error_message.should eq "Error, invalid periodicity"
     end
   end
 end
