@@ -42,7 +42,7 @@ class Transaction
   def self.create(current_account, is_payment_p, periodicity, name, amount, date, description)
     is_payment = is_payment_p.eql?('0') ? false : true
 
-    if @period.eql?('0')
+    if periodicity.eql?('0')
       transaction = TransactionDone.for_account(current_account)
       transaction.date = date
     else

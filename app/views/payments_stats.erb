@@ -11,8 +11,19 @@
   <h1>Payments Statistics</h1>
 
   <% if @stats.empty? %>
-  	<p>You don't have payments done in this period</p>
+    <p>You don't have payments done in this period</p>
   <% else %>
+  	<div id="canvas">
+      <canvas id="myChart"></canvas>
+    </div>
+	    
+	<script src="javascripts/chart/Chart.js"></script>
+	<script src="javascripts/chart/data-chart.js"></script>
+	<script>data = setGetData(<%=@dates%>, <%=@data%>)</script>
+	<script src="javascripts/chart/view-chart.js"></script>    
+	    
+  	<br>
+  
 	<table align="center" border="1">
 	  <tr>
 	    <th>Spending Name</th>

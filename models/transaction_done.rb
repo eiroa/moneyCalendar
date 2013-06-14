@@ -51,8 +51,6 @@ class TransactionDone
       return "Error, invalid date"
     elsif !check_amount
       return "Error, invalid amount"
-    elsif !check_periodicity
-      return "Error, invalid periodicity"
     end
   end
 
