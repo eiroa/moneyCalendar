@@ -18,7 +18,6 @@ Feature: Create new Payment
     When I press "saveButton"
     Then I should see "The Gasto-test payment has been registered"
     
-  @wip
   Scenario: Happy Path to Single Payment
     Given I am on "register payment page"
     And I fill in "name" with "Gasto-test"
@@ -34,7 +33,6 @@ Feature: Create new Payment
     When I press "saveButton"
     Then I should see "Error, name is required"
     
-  @wip
   Scenario: PaymentDone already exists
     Given I am on "register payment page"
     And I fill in "name" with "Gasto-test"
