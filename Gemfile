@@ -13,7 +13,7 @@ gem 'thin' # or mongrel
 # Project requirements
 gem 'rake'
 gem 'omniauth'
-gem 'omniauth-twitter'
+gem 'omniauth-twitter', :github => 'arunagw/omniauth-twitter'
 
 # Component requirements
 gem 'slim'
@@ -35,6 +35,7 @@ gem 'dm-sqlite-adapter', :group => 'test'
 gem 'rspec', :group => 'test'
 gem 'capybara', :group => 'test'
 gem 'cucumber', :group => 'test'
+gem 'simplecov', :group => 'test'
 gem 'rack-test', :require => 'rack/test', :group => 'test'
 
 # Padrino Stable Gem
