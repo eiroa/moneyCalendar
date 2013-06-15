@@ -3,14 +3,14 @@ require 'date'
 Given(/^there is payment with name "([^\"]*)" and date "([^\"]*)"$/) do |name, date|
   p = Transaction.payment_for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
-  p.expiry_date = Date.parse(date)
+  p.pay_date = Date.parse(date)
   p.save
 end
 
 Given(/^there is income with name "([^\"]*)" and date "([^\"]*)"$/) do |name, date|
   p = Transaction.income_for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
-  p.expiry_date = Date.parse(date)
+  p.pay_date = Date.parse(date)
   p.save
 end
 
@@ -46,7 +46,7 @@ Given(/^there is payment_done with name "([^\"]*)" and date "([^\"]*)" and amoun
   
   p = TransactionDone.for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
-  p.date = Date.parse(date)
+  p.pay_date = Date.parse(date)
   p.amount = amount
   p.is_payment = true
   p.save
@@ -57,7 +57,7 @@ Given(/^there is income_received with name "([^\"]*)" and date "([^\"]*)" and am
   
   p = TransactionDone.for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
-  p.date = Date.parse(date)
+  p.pay_date = Date.parse(date)
   p.amount = amount
   p.is_payment = false
   p.save

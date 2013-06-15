@@ -5,7 +5,7 @@ class Transaction
   property :id, Serial
   property :name, String
   property :amount, Float
-  property :expiry_date, DateTime
+  property :pay_date, DateTime
   property :periodicity, Integer
   property :description, String
   property :is_payment, Boolean
@@ -16,10 +16,10 @@ class Transaction
     t
   end
 
-  # Return "cant" transactions sorted by expiry_date
+  # Return "cant" transactions sorted by pay_date
   def self.get_last_sorted(cant, account_id)
-    payments = Transaction.all(:account_id => account_id, :is_payment => true, :expiry_date.gte => Date.today)
-    return (payments.sort! { |a,b| a.expiry_date <=> b.expiry_date })[0..cant-1]
+    payments = Transaction.all(:account_id => account_id, :is_payment => true, :pay_date.gte => Date.today)
+    return (payments.sort! { |a,b| a.pay_date <=> b.pay_date })[0..cant-1]
   end
 
   # Returns a payment with "account"
@@ -44,7 +44,7 @@ class Transaction
 
     if periodicity.eql?('0')
       transaction = TransactionDone.for_account(current_account)
-      transaction.date = date
+      transaction.pay_date = date
     else
       repeated = Transaction.all(:account_id => current_account.id)
         .first(:name => name, :is_payment => is_payment)
@@ -52,7 +52,7 @@ class Transaction
       raise TransactionRepeated if repeated != nil
 
       transaction = Transaction.for_account(current_account)
-      transaction.expiry_date = date
+      transaction.pay_date = date
       transaction.periodicity = periodicity
     end
 
@@ -66,7 +66,7 @@ class Transaction
   end
 
   def check_date
-    return self.expiry_date.is_a?(Date) && self.expiry_date >= Date.today
+    return self.pay_date.is_a?(Date) && self.pay_date >= Date.today
   end
 
   def check_amount

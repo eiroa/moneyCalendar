@@ -4,7 +4,7 @@ describe Transaction do
   
   describe 'get_last_sorted' do
     it 'should return [] if there are no transactions' do
-      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([])
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :pay_date.gte => Date.today).and_return([])
       
       result = Transaction.get_last_sorted(10, 1)
       result.should eq []
@@ -12,12 +12,12 @@ describe Transaction do
     
     it 'should return all transactions if there are less transactions than the ones requested' do
       t = Transaction.new
-      t.expiry_date = Date.today + 2
+      t.pay_date = Date.today + 2
       
       t2 = Transaction.new
-      t2.expiry_date = Date.today + 1
+      t2.pay_date = Date.today + 1
       
-      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :pay_date.gte => Date.today).and_return([
         t, t2
       ])
       
@@ -27,15 +27,15 @@ describe Transaction do
     
     it 'should return all transactions if i request the same quantity than the ones registered' do
       t = Transaction.new
-      t.expiry_date = Date.today + 2
+      t.pay_date = Date.today + 2
       
       t2 = Transaction.new
-      t2.expiry_date = Date.today + 1
+      t2.pay_date = Date.today + 1
       
       t3 = Transaction.new
-      t3.expiry_date = Date.today + 3
+      t3.pay_date = Date.today + 3
       
-      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :pay_date.gte => Date.today).and_return([
         t, t2, t3
       ])
       
@@ -45,15 +45,15 @@ describe Transaction do
     
     it 'should return the requested quantity of transactions if there are already more transactions registered' do
       t = Transaction.new
-      t.expiry_date = Date.today + 2
+      t.pay_date = Date.today + 2
       
       t2 = Transaction.new
-      t2.expiry_date = Date.today + 1
+      t2.pay_date = Date.today + 1
       
       t3 = Transaction.new
-      t3.expiry_date = Date.today + 3
+      t3.pay_date = Date.today + 3
       
-      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :expiry_date.gte => Date.today).and_return([
+      Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :pay_date.gte => Date.today).and_return([
         t, t2, t3
       ])
       
@@ -64,42 +64,42 @@ describe Transaction do
   
   describe 'check_date' do
 
-    it 'should return false if expiry_date is before today and not Single Periodicity' do
+    it 'should return false if pay_date is before today and not Single Periodicity' do
       payment1 = Transaction.new
       payment1.name ='my payment'
-      payment1.expiry_date = Date.today-1
+      payment1.pay_date = Date.today-1
       payment1.periodicity =1;
       payment1.check_date.should be false
     end
 
-    it 'should return true if expiry_date is today and not single' do
+    it 'should return true if pay_date is today and not single' do
       payment1 = Transaction.new
       payment1.name ='my payment'
-      payment1.expiry_date = Date.today
+      payment1.pay_date = Date.today
       payment1.periodicity =1;
       payment1.check_date.should be true
     end
 
-    it 'should return true if expiry_date is today and single periodicity' do
+    it 'should return true if pay_date is today and single periodicity' do
       payment1 = Transaction.new
       payment1.name ='my payment'
-      payment1.expiry_date = Date.today
+      payment1.pay_date = Date.today
       payment1.periodicity =0;
       payment1.check_date.should be true
     end
 
-    it 'should return true if expiry_date is after today and not single' do
+    it 'should return true if pay_date is after today and not single' do
       payment1 = Transaction.new
       payment1.name ='my payment'
-      payment1.expiry_date = Date.today+1
+      payment1.pay_date = Date.today+1
       payment1.periodicity =1;
       payment1.check_date.should be true
     end
 
-    it 'should return false if expiry_date is not valid' do
+    it 'should return false if pay_date is not valid' do
       payment1 = Transaction.new
       payment1.name ='my payment'
-      payment1.expiry_date = 'text'
+      payment1.pay_date = 'text'
       payment1.check_date.should be false
     end
 
@@ -175,14 +175,14 @@ describe Transaction do
     it 'should return "Error, invalid date" if payment date is invalid' do
       payment1 = Transaction.new
       payment1.name = "payment"
-      payment1.expiry_date= "pepe"
+      payment1.pay_date= "pepe"
       payment1.get_error_message.should eq "Error, invalid date"
     end
 
     it 'should return "Error, invalid amount" if amount is invalid' do
       payment1 = Transaction.new
       payment1.name = "payment"
-      payment1.expiry_date= Date.today
+      payment1.pay_date= Date.today
       payment1.periodicity = 1;
       payment1.amount = -1
       payment1.get_error_message.should eq "Error, invalid amount"
@@ -191,7 +191,7 @@ describe Transaction do
     it 'should return "Error, invalid periodicity" if periodicity is invalid' do
       payment1 = Transaction.new
       payment1.name = "payment"
-      payment1.expiry_date= Date.today
+      payment1.pay_date= Date.today
       payment1.amount = 100
       payment1.periodicity = -1.4
       payment1.get_error_message.should eq "Error, invalid periodicity"

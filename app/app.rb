@@ -59,9 +59,10 @@ module MoneyCalendar
 
     get '/save' do
       @is_payment = params[:is_payment]
+      @periodicity =  params[:periodicity]
 
       begin
-        @transaction = Transaction.create(current_account, @is_payment, params[:periodicity],
+        @transaction = Transaction.create(current_account, @is_payment, @periodicity,
           params[:name], params[:amount], params[:date],
           params[:description])
 

@@ -22,7 +22,7 @@
 				<% @expirations.each do |pay| %>
 			<tr>
 				<td><%= pay.name %></td>
-				<td><%= pay.expiry_date.to_date %></td>
+				<td><%= pay.pay_date.to_date %></td>
 				<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 			</tr>
 			<% end %>

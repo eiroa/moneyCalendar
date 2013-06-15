@@ -4,8 +4,8 @@ class TransactionDone
   # property <name>, <type>
   property :id, Serial
   property :name, String
-  property :amount, Integer
-  property :date, DateTime
+  property :amount, Float
+  property :pay_date, DateTime
   property :description, String
   property :is_payment, Boolean
   property :transaction_id, Integer
@@ -29,7 +29,7 @@ class TransactionDone
   end
   
   def check_date
-    return self.date.is_a?(Date)
+    return self.pay_date.is_a?(Date)
   end
 
   def check_amount
@@ -64,6 +64,6 @@ class TransactionDone
   end
   
   def self.from_to(from_date, to_date)
-    return TransactionDone.all(:date.gt => from_date, :date.lt => to_date)
+    return TransactionDone.all(:pay_date.gt => from_date, :pay_date.lt => to_date)
   end
 end

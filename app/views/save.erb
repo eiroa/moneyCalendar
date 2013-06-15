@@ -11,11 +11,13 @@
 			Amount: <%= @transaction.amount %>
 		</p>
 		<p>
-			PaymentDate: <%= @transaction.expiry_date.to_date %>
+			PaymentDate: <%= @transaction.pay_date.to_date %>
 		</p>
-		<p>
+		<% if !@periodicity.eql?('0') %>
+		<p> 
 			PaymentPeriodicity: <%= @transaction.periodicity %> months
 		</p>
+		<% end %>
 		<p>
 			Description: <%= @transaction.description %>
 		</p>
@@ -33,11 +35,13 @@
 			Amount: <%= @transaction.amount %>
 		</p>
 		<p>
-			PaymentDate: <%= @transaction.expiry_date.to_date %>
+			PaymentDate: <%= @transaction.pay_date.to_date %>
 		</p>
+		<% if !@periodicity.eql?('0') %>
 		<p>
 			PaymentPeriodicity: <%= @transaction.periodicity %>  months
 		</p>
+		<% end %>
 		<p>
 			Description: <%= @transaction.description %>
 		</p>
