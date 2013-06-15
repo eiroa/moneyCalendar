@@ -51,7 +51,7 @@ describe Transaction do
     end
   end
 
-  describe'for_account(account)' do
+  describe 'for_account(account)' do
     before(:each) do
       @account = Account.new
       @transaction = Transaction.for_account(@account)
