@@ -18,7 +18,7 @@ class TransactionDone
   
   def self.for_transaction(transaction)
     done = TransactionDone.new
-    done.transaction = transaction
+    done.transaction_id = transaction.id
     done
   end
   
