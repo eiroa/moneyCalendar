@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>New Income - Money Calendar</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body align="center">
+		<h1>Confirm your payment</h1>
+		<br>
+
+		
+
+		<form  action="paymentDone" method="get">
+			
+			<table border="0" align = "center">
+				
+			</table>
+		</form>
+		<a href="/coming_expirations">Return to upcoming payments</a>
+		<% if @errorMessage != nil %>
+		<h2 color="red" allign="center"><%= @errorMessage%></h1>
+		<% end %>
+	</body>
+</html>

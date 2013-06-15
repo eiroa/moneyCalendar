@@ -1,7 +1,7 @@
 @wip
 Feature: Pay an upcoming Payment
   As a user
-  I want to be able to paymy upcoming payments
+  I want to be able to pay my upcoming payments
 
   Background:
   	Given I am logged in

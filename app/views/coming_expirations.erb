@@ -14,15 +14,23 @@
 			You don't have upcoming payments
 		</p>
 		<% else %>
-		<table align="center" border="1">
+		<table class="table" align="center" border="1">
 			<tr>
 				<th>Payment name</th>
 				<th>Payment date</th>
+				<th>Confirm payment done</th>
 
 				<% @expirations.each do |pay| %>
 			<tr>
 				<td><%= pay.name %></td>
 				<td><%= pay.pay_date.to_date %></td>
+				<td>
+					
+					<form  action="pay" method="get">
+					<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
+				    </form>
+				
+			</td>
 				<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 			</tr>
 			<% end %>

@@ -1342,13 +1342,13 @@ table {
 	border-spacing: 0
 }
 .table {
-	width: 100%;
-	margin-bottom: 20px
+	width: 50%;
+	margin-bottom: 10px
 }
 .table th, .table td {
-	padding: 8px;
-	line-height: 20px;
-	text-align: left;
+	padding: 7px;
+	line-height: 12px;
+	text-align: center;
 	vertical-align: top;
 	border-top: 1px solid #ddd
 }
@@ -2227,7 +2227,7 @@ button.close {
 	margin-bottom: 0;
 	*margin-left: .3em;
 	font-size: 14px;
-	line-height: 20px;
+	line-height: 15px;
 	color: #333;
 	text-align: center;
 	text-shadow: 0 1px 1px rgba(255,255,255,0.75);

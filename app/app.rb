@@ -100,6 +100,15 @@ module MoneyCalendar
       set_current_account(nil)
       redirect '/'
     end
+    
+    get :pay do
+      render 'pay'
+    end
+    
+    get :profile do
+      
+      render 'profile'
+    end
 
     ##
     # Caching support
