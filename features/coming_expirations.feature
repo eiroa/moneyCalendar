@@ -74,6 +74,9 @@ Feature: Coming expirations
     Then I should see "Gasto-test4"
     Then I should see "Gasto-test3"
 
+  @wip
+  Scenario: Buttons are presents
+  	Given I am on "coming expirations page"
     When I press "addNewPaymentButton"
     Then I should see "Create a new Payment"
   

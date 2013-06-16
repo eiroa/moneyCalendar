@@ -11,13 +11,10 @@
 		<br>
 
 		<input type="submit" value="Save" class="btn" id="saveButton">
+		<a href="/coming_expirations"><input type="button" value="Cancel" id="returnButton" class="btn" /></a>
 	</form>
-
-	<form action="coming_expirations" method="get">
-		<input type="submit" value="Cancel" class="btn" id="returnButton" />
-	</form>
-
+	
 	<% if @message != nil %>
-	<h2 color="red" allign="center"><%= @message%></h1>
+	<div class="alert centered"><%= @message%></div>
 	<% end %>
 </body>

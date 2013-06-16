@@ -125,7 +125,7 @@ module MoneyCalendar
       begin
         @current_account.change_name(name)
       rescue NameChanged => e
-        @message << "\n#{e.message}"
+        @message << "\n #{e.message}"
       end
       
       @current_account.save

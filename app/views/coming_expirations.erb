@@ -1,79 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Upcoming payments - Money Calendar</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+<div align="center">
+	<h1>Upcoming payments</h1>
+	<br>
 
-	<body align="center">
-		<h1>Upcoming payments</h1>
+	<% if @expirations.empty? %>
+	<p>
+		You don't have upcoming payments
+	</p>
+	<% else %>
+	<table class="table" align="center" border="1">
+		<tr>
+			<th>Payment name</th>
+			<th>Payment date</th>
+			<th>Confirm payment done</th>
 
-		<% if @expirations.empty? %>
-		<p>
-			You don't have upcoming payments
-		</p>
-		<% else %>
-		<table class="table" align="center" border="1">
-			<tr>
-				<th>Payment name</th>
-				<th>Payment date</th>
-				<th>Confirm payment done</th>
-
-				<% @expirations.each do |pay| %>
-			<tr>
-				<td><%= pay.name %></td>
-				<td><%= pay.pay_date.to_date %></td>
-				<td>
-					
-					<form  action="pay" method="get">
-					<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
-				    </form>
-				
-			</td>
-				<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
-			</tr>
-			<% end %>
-			</tr>
-		</table>
+			<% @expirations.each do |pay| %>
+		<tr>
+			<td><%= pay.name %></td>
+			<td><%= pay.pay_date.to_date %></td>
+			<td>
+			<form  action="pay" method="get">
+				<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
+			</form></td>
+			<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
+		</tr>
 		<% end %>
+		</tr>
+	</table>
+	<% end %>
 
-		<form action="new_spending" method="get">
-			<input type="submit" value="Add new payment" id="addNewPaymentButton" />
-		</form>
-
-		<form action="new_income" method="get">
-			<input type="submit" value="Add new income" id="addNewIncomeButton" />
-		</form>
-		<div class="well" >
-			<div class="form-horizontal" >
-				<form class="form-horizontal" action="payments_stats" method="get" id="stats">
-					<p>
-						View how many payments I did in a given period of time
-					</p>
-					From date
-					<input type="date" id="from_date" name="from_date" />
-					To date
-					<input type="date" id="to_date" name="to_date" />
-					<input type="submit" value="View stats" id="viewPaymentsStatsButton" />
-				</form>
-			</div>
-			</div>
-<div class="well" >
-			<div class ="form-horizontal">
-				<form action="incomes_stats" method="get" id="stats">
-					<p>
-						View how many incomes I received in a given period of time
-					</p>
-					From date
-					<input type="date" id="incomes_from_date" name="incomes_from_date" />
-					To date
-					<input type="date" id="incomes_to_date" name="incomes_to_date" />
-					<input type="submit" value="View stats" id="viewIncomesStatsButton" />
-				</form>
-			</div>
-
+	<a href="/new_spending"><button id="addNewPaymentButton" class="btn"/>Add new payment</button></a>
+	<a href="/new_income"><button id="addNewIncomeButton" class="btn"/>Add new income</button></a>
+	<br><br>
+	
+	<div class="well">
+		<div class="form-horizontal" >
+			<form class="form-horizontal" action="payments_stats" method="get" id="stats">
+				<p>
+					View how many payments I did in a given period of time
+				</p>
+				From date
+				<input type="date" id="from_date" name="from_date" />
+				To date
+				<input type="date" id="to_date" name="to_date" />
+				<input type="submit" value="View stats" id="viewPaymentsStatsButton" />
+			</form>
 		</div>
-	</body>
-</html>
+	</div>
+	<div class="well" >
+		<div class ="form-horizontal">
+			<form action="incomes_stats" method="get" id="stats">
+				<p>
+					View how many incomes I received in a given period of time
+				</p>
+				From date
+				<input type="date" id="incomes_from_date" name="incomes_from_date" />
+				To date
+				<input type="date" id="incomes_to_date" name="incomes_to_date" />
+				<input type="submit" value="View stats" id="viewIncomesStatsButton" />
+			</form>
+		</div>
 
+	</div>
+<div>

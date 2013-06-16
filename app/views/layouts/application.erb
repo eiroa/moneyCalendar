@@ -1,69 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Money Calendar</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ubuntu orange and unique font.">
-  <meta name="author" content="Thomas Park">
+<html debug="true">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Money Calendar</title>
 
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+		<link href="stylesheets/style_add.css" media="all" rel="stylesheet" type="text/css">
+		<link href="stylesheets/style.css" media="all" rel="stylesheet" type="text/css">
 
-  <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
-  <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
-  <link href="stylesheets/font-awesome.min.css" rel="stylesheet">
-  <link href="stylesheets/bootswatch.css" rel="stylesheet">
-  <link href="stylesheets/camilo.css" rel="stylesheet">
+		<link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+		<link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="stylesheets/font-awesome.min.css" rel="stylesheet">
+		<link href="stylesheets/bootswatch.css" rel="stylesheet">
+		<link href="stylesheets/camilo.css" rel="stylesheet">
+	</head>
 
-</head>
+	<body class=" vis-public env-production" style="">
+		<div id="wrapper">
+			<div class="header header-logged-in true">
+				<div class="container clearfix">
+					<a class="header-logo-invertocat mega-octicon" href="/">Money Calendar</a>
 
-<body class="preview" id="top" data-spy="scroll" data-target=".subnav" data-offset="80">
+					<div class="divider-vertical"></div>
 
-<!-- Navbar
-  ================================================== -->
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand" href="/">Money Calendar</a>
-      
-      <div class="nav-collapse collapse" id="main-menu">
-        <ul class="nav" id="main-menu-left" />
-        
-        <ul class="nav pull-right" id="main-menu-right">
-          <% if current_account %>
-          	<li><a rel="tooltip" href="/coming_expirations" title="Coming expirations"><%= current_account.friendly_name %></a></li>
-          	<li><a rel="tooltip" href="/profile" title="Profile settings">Profile settings</a></li>
-          	<li><a rel="tooltip" href="/logout" title="Logout">Log out</a></li>
-          <% end %>
-        </ul>
-        
-      </div>
-    </div>
-  </div>
-</div>
+					<ul id="user-links" class="nav pull-right">
+						<% if current_account %>
+						<li>
+							<a href="/coming_expirations" class="name"> <img src="<%= current_account.image_m %>" width="25" height="25"><%= current_account.friendly_name %></a>
+						</li>
+						
+						<li><div class="divider-vertical"></div></li>
 
-<div class="container">
-	<section id="content">
-	    <%= yield %>
-	</section>
-</div>
+						<li>
+							<a rel="tooltip" href="/profile" id="account_settings" class="tooltipped downwards" title="Account settings"> <img src="images/settings.png" width="16" height="16"></a>
+						</li>
 
+						<li>
+							<a href="/logout" id="logout" class="tooltipped downwards" title="Sign out"><img src="images/log-out.png" width="16" height="16"></a>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
 
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="javascripts/jquery.smooth-scroll.min.js"></script>
-<script src="javascripts/bootstrap.min.js"></script>
-<script src="javascripts/bootswatch.js"></script>
+			<div class="site hfeed" itemscope="" itemtype="http://schema.org/WebPage">
 
+				<section id="content">
+					<%= yield %>
+				</section>
 
-</body>
+			</div>
+			<div class="modal-backdrop"></div>
+		</div>
+
+		<div id="footer-push"></div><!-- hack for sticky footer -->
+		</div><!-- end of wrapper - hack for sticky footer -->
+
+		<!-- footer -->
+		<div id="footer"></div><!-- /.#footer -->
+
+	</body>
 </html>

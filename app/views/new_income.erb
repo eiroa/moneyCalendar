@@ -1,74 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>New Income - Money Calendar</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+<div align="center">
+	<h1>Create a new Income</h1>
+	<br>
 
-	<body align="center">
-		<h1>Create a new Income</h1>
-		<br>
+	<h4>Please define the new Income</h4>
+	<br>
 
-		<h4>Please define the new Income</h4>
-		<br>
+	<form  action="save" method="get">
+		<input type="hidden" name="is_payment" value="0">
+		<table border="0" align = "center">
+			<tr>
+				<td>Name</td>
+				<td>
+				<input type="text" name="name">
+				</td>
 
-		<form  action="save" method="get">
-			<input type="hidden" name="is_payment" value="0">
-			<table border="0" align = "center">
-				<tr>
-					<td>Name</td>
-					<td>
-					<input type="text" name="name">
-					</td>
+			</tr>
 
-				</tr>
+			<tr>
+				<td>Amount</td>
+				<td>
+				<input type="text" name="amount" onkeyup="this.value=this.value.replace(/[^\d]/,'')">
+				</td>
+			</tr>
 
-				<tr>
-					<td>Amount</td>
-					<td>
-					<input type="text" name="amount" onkeyup="this.value=this.value.replace(/[^\d]/,'')">
-					</td>
-				</tr>
+			<tr>
+				<td>Incoming payment date</td>
+				<td>
+				<input type="date" name="date">
+				</td>
+			</tr>
 
-				<tr>
-					<td>Incoming payment date</td>
-					<td>
-					<input type="date" name="date">
-					</td>
-				</tr>
+			<tr>
+				<td>Periodicity</td>
+				<td>
+				<select name="periodicity">
+					<OPTION VALUE="0">Single Income</OPTION>
+					<OPTION VALUE="1">1 Month</OPTION>
+					<OPTION VALUE="2">2 Months</OPTION>
+					<OPTION VALUE="3">3 Months</OPTION>
+					<OPTION VALUE="4">4 Months</OPTION>
+					<OPTION VALUE="6">6 Months</OPTION>
+					<OPTION VALUE="12">1 Year</OPTION>
+				</select></td>
+			</tr>
 
-				<tr>
-					<td>Periodicity</td>
-					<td>
-					<select name="periodicity">
-						<OPTION VALUE="0">Single Income</OPTION>
-						<OPTION VALUE="1">1 Month</OPTION>
-						<OPTION VALUE="2">2 Months</OPTION>
-						<OPTION VALUE="3">3 Months</OPTION>
-						<OPTION VALUE="4">4 Months</OPTION>
-						<OPTION VALUE="6">6 Months</OPTION>
-						<OPTION VALUE="12">1 Year</OPTION>
-					</select></td>
-				</tr>
+			<tr>
+				<td>Description</td>
+				<td>				<textarea rows="4" name="description" placeholder="Describe this income here"></textarea></td>
+			</tr>
 
-				<tr>
-					<td>Description</td>
-					<td>
-						<textarea rows="4" name="description" placeholder="Describe this income here"></textarea>
-					</td>
-				</tr>
+			<tr>
+				<td colspan=2 align="center">
+				<input type="submit" value="Save" id="saveButton" class="btn">
+				
+				<a href="/coming_expirations">
+				<input type="button" value="Cancel" id="returnButton" class="btn" />
+				</a></td>
+			</tr>
+		</table>
+	</form>
 
-				<tr>
-					<td colspan=2>
-					<input type="submit" value="Save" id="saveButton">
-					</td>
-				</tr>
-			</table>
-		</form>
-		<a href="/coming_expirations">Return to upcoming payments</a>
-		<% if @errorMessage != nil %>
-		<h2 color="red" allign="center"><%= @errorMessage%></h1>
-		<% end %>
-	</body>
-</html>
+	<% if @errorMessage != nil %>
+	<h2 color="red" allign="center"><%= @errorMessage%></h1>
+	<% end %>
+</div>

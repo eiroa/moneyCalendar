@@ -12,6 +12,14 @@ class Account
   def friendly_name
     name.nil? ? uid : name
   end
+  
+  def image_m
+    self.provider.eql?('twitter') ? omniauth['info']['image'] : 'images/profile_m.png'  
+  end
+  
+  def image_l
+    self.provider.eql?('twitter') ? omniauth['info']['image'].sub("_normal", "") : 'images/profile_l.png'  
+  end
 
   def self.create_with_omniauth(auth)
     account = Account.new
