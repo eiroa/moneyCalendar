@@ -52,7 +52,7 @@ module MoneyCalendar
 
     end
 
-    get '/coming_expirations' do
+    get :coming_expirations do
       @expirations = Transaction.get_last_sorted(10, current_account.id)
       render 'coming_expirations'
     end
