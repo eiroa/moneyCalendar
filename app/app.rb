@@ -27,7 +27,7 @@ module MoneyCalendar
 
     get :login do
       render '/home/login'
-    end
+    end  	Then I should see ""
 
     get :auth, :map => '/auth/:provider/callback' do
       auth    = request.env["omniauth.auth"]
@@ -104,8 +104,27 @@ module MoneyCalendar
     end
 
     get :pay do
+      @payment = Transaction.first( :account_id => current_account.id, :is_payment => true, :name => params[:payment_name])
       render 'pay'
     end
+    
+    get :save_payment do
+
+      begin
+        @payment = Transaction.create(current_account, true, '0',
+          params[:name], params[:amount], params[:payment_date],
+          params[:description])
+
+        @payment.save
+        payed = Transaction.first( :account_id => current_account.id, :is_payment => true, :name => @payment.name)
+        payed.destroy
+        render 'save_payment'
+
+      rescue TransactionError, TransactionRepeated => e
+        @Message = e.message
+        render 'pay'
+      end
+    end  
 
     get :profile do
       render 'profile'

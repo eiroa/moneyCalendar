@@ -11,16 +11,23 @@
 		<br>
 
 		
+	
+		<form  action="save_payment" method="get">
+	    Payment
+		<input type="text" name="namd" value="<%= @payment.name %>"  disabled>
+		<br>
+		Payment date
+		<input type="date" name="payment_date">
+		<br>
 
-		<form  action="paymentDone" method="get">
-			
-			<table border="0" align = "center">
-				
-			</table>
+		<input type="hidden" name="name" value="<%= @payment.name %>"  >
+		<input type="hidden" name="amount" value="<%= @payment.amount %>">
+		<input type="hidden" name="description" value="<%= @payment.description %>">
+		<input type="submit" value="Confirm Payment" class="btn" id="confirm_payment">
 		</form>
 		<a href="/coming_expirations">Return to upcoming payments</a>
-		<% if @errorMessage != nil %>
-		<h2 color="red" allign="center"><%= @errorMessage%></h1>
+		<% if @Message != nil %>
+		<h2 color="red" allign="center"><%= @Message%></h1>
 		<% end %>
 	</body>
 </html>
