@@ -38,7 +38,8 @@
         
         <ul class="nav pull-right" id="main-menu-right">
           <% if current_account %>
-          	<li><a rel="tooltip" href="profile" title="Profile"><%= current_account.friendly_name %></a></li>
+          	<li><a rel="tooltip" href="/coming_expirations" title="Coming expirations"><%= current_account.friendly_name %></a></li>
+          	<li><a rel="tooltip" href="/profile" title="Profile settings">Profile settings</a></li>
           	<li><a rel="tooltip" href="/logout" title="Logout">Log out</a></li>
           <% end %>
         </ul>

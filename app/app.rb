@@ -42,6 +42,7 @@ module MoneyCalendar
       role.protect "/coming_expirations"
       role.protect "/save_payment"
       role.protect "/new_spending"
+      role.protect "/profile"
     end
 
     ##############################
