@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>New Income - Money Calendar</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+<body align="center">
+	<h1>Edit your profile preferences</h1>
+	<br>
 
-	<body align="center">
-		<h1>Edit your profile preferences</h1>
-		<br>
-
+	<form action="save_profile" method="get">
+		Name <input type="text" name="name" value="<%= @current_account.friendly_name %>"> <br>
+		Email <input type="text" name="email" value="<%= @current_account.email %>"> <br>
 		
+		<input type="submit" value="Save" id="saveButton">
+	</form>
 
-		<form  action="saveProfile" method="get">
-			
-			<table border="0" align = "center">
-				
-			</table>
-		</form>
-		<a href="/coming_expirations">Return to upcoming payments</a>
-		<% if @errorMessage != nil %>
-		<h2 color="red" allign="center"><%= @errorMessage%></h1>
-		<% end %>
-	</body>
-</html>
+	<a href="/coming_expirations">Return to upcoming payments</a>
+
+	<% if @message != nil %>
+	<h2 color="red" allign="center"><%= @message%></h1>
+	<% end %>
+</body>

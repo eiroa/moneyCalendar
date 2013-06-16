@@ -100,12 +100,34 @@ module MoneyCalendar
       set_current_account(nil)
       redirect '/'
     end
-    
+
     get :pay do
       render 'pay'
     end
-    
+
     get :profile do
+      render 'profile'
+    end
+
+    get :save_profile do
+      @current_account = current_account
+      mail = params[:email]
+      name = params[:name]
+      @message = ""
+      
+      begin
+        @current_account.change_email(mail)
+      rescue MailFormatError, MailChanged => e
+        @message << "#{e.message}"
+      end
+      
+      begin
+        @current_account.change_name(name)
+      rescue NameChanged => e
+        @message << "\n#{e.message}"
+      end
+      
+      @current_account.save
       
       render 'profile'
     end
