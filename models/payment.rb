@@ -5,7 +5,7 @@ class Payment
   property :id, Serial
   property :name, String
   property :amount, Float
-  property :expiry_date, DateTime
+  property :pay_date, DateTime
   property :periodicity, Integer
   property :description, String
   belongs_to :account
