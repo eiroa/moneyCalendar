@@ -8,17 +8,27 @@ class Account
   property :role, String
   property :uid, String
   property :provider, String
+  property :picture, String
   
   def friendly_name
     name.nil? ? uid : name
   end
   
   def image_m
-    self.provider.eql?('twitter') ? omniauth['info']['image'] : 'images/profile_m.png'  
+    self.picture  
   end
   
   def image_l
-    self.provider.eql?('twitter') ? omniauth['info']['image'].sub("_normal", "") : 'images/profile_l.png'  
+    provider.eql?('twitter') ? self.picture.sub("_normal", "") : 'images/profile_l.png'  
+  end
+  
+  def update_picture(auth)
+    picture = provider.eql?('twitter') ? auth['info']['image'] : 'images/profile_m.png'
+    
+    if(! picture.eql?(self.picture))
+      self.picture = picture
+      self.save
+    end
   end
 
   def self.create_with_omniauth(auth)

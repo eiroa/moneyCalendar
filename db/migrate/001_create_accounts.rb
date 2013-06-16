@@ -7,6 +7,7 @@ migration 1, :create_accounts do
       column :role, String, :length => 255
       column :uid, String, :length => 255
       column :provider, String, :length => 255
+      column :picture, String, :length => 255
     end
   end
 
