@@ -116,8 +116,14 @@ module MoneyCalendar
 
         @payment.save
         payed = Transaction.first( :account_id => current_account.id, :is_payment => true, :name => @payment.name)
+        if payed.periodicity == 0
         payed.destroy
+        else
+        newDate = payed.pay_date + (payed.periodicity * 30)     
+        payed.update(:pay_date => newDate)
         render 'save_payment'
+        end
+        
 
       rescue TransactionError, TransactionRepeated => e
         @Message = e.message

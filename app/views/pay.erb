@@ -3,9 +3,9 @@
 	<br>
 
 	<form  action="save_payment" method="get">
-		Payment<input type="text" name="namd" value="<%= @payment.name %>">
+		Payment<input type="text" name="namd" value="<%= @payment.name %>" disabled>
 		<br>
-		Payment date<input type="date" name="payment_date">
+		Payment date<input type="date" name="payment_date" value="<%=Date.today %>">
 		<br>
 
 		<input type="hidden" name="name" value="<%= @payment.name %>"  >
