@@ -11,5 +11,5 @@ Feature: Pay an upcoming Payment
   	And I am on "coming expirations page"
   	And I press "pay_Gasto-test0_button"
   	And I fill in "payment_date" with "today"
-  	And I press "confirm_payment"
+  	And I press "confirmPayment"
   	Then I should see "The Gasto-test0 payment has been set as payed"
