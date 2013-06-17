@@ -31,7 +31,7 @@ describe TransactionDone do
 
       TransactionDone.should_receive(:from_to).with(Date.today, Date.today + 1, true).and_return([])
 
-      result = TransactionDone.payments_from_to(Date.today, Date.today + 1)
+      result = TransactionDone.from_to(Date.today, Date.today + 1,true)
       result.should eq []
     end
   end
@@ -43,7 +43,7 @@ describe TransactionDone do
 
       TransactionDone.should_receive(:from_to).with(Date.today, Date.today + 1, false).and_return([])
 
-      result = TransactionDone.incomes_from_to(Date.today, Date.today + 1)
+      result = TransactionDone.from_to(Date.today, Date.today + 1,false)
       result.should eq []
     end
   end
