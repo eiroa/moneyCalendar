@@ -11,9 +11,10 @@ Feature: Statistics of payments
   	Given I am on "coming expirations page"
   	And I fill in "from_date" with "2010/01/01"
     And I fill in "to_date" with "2010/05/01"
-    And I press "viewPaymentsStatsButton"
+    And I select "Payment" from "type"
+    And I press "viewStatsButton"
 
-    Then I should see "You don't have payments done in this period"
+    Then I should see "You don't have payments in this period"
   
   Scenario: There is a payment done in given period
 	Given I am on "coming expirations page"
@@ -21,7 +22,8 @@ Feature: Statistics of payments
 	
   	And I fill in "from_date" with "2010/01/01"
     And I fill in "to_date" with "2010/05/01"
-    And I press "viewPaymentsStatsButton"
+    And I select "Payment" from "type"
+    And I press "viewStatsButton"
  
  	Then I should see "Gasto-test1"
  	Then I should see "2010-04-30"
@@ -36,7 +38,8 @@ Feature: Statistics of payments
 	
   	And I fill in "from_date" with "2010/01/01"
     And I fill in "to_date" with "2010/05/01"
-    And I press "viewPaymentsStatsButton"
+    And I select "Payment" from "type"
+    And I press "viewStatsButton"
  
  	Then I should see "Gasto-test1"
  	Then I should see "2010-03-30"
@@ -60,6 +63,7 @@ Feature: Statistics of payments
 	
   	And I fill in "from_date" with "2010/01/01"
     And I fill in "to_date" with "2010/05/01"
-    And I press "viewPaymentsStatsButton"
+    And I select "Payment" from "type"
+    And I press "viewStatsButton"
  
- 	Then I should see "You don't have payments done in this period"
+ 	Then I should see "You don't have payments in this period"

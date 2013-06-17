@@ -9,19 +9,21 @@ Feature: Statistics of payments
 
   Scenario: There are not incomes received
   	Given I am on "coming expirations page"
-  	And I fill in "incomes_from_date" with "2010/01/01"
-    And I fill in "incomes_to_date" with "2010/05/01"
-    And I press "viewIncomesStatsButton"
+  	And I fill in "from_date" with "2010/01/01"
+    And I fill in "to_date" with "2010/05/01"
+    And I select "Income" from "type"
+    And I press "viewStatsButton"
 
-    Then I should see "You didn't received any incomes in this period"
+    Then I should see "You don't have incomes in this period"
   
   Scenario: There has been an income received in a given period
 	Given I am on "coming expirations page"
 	And there is income_received with name "Ingreso-test1" and date "2010/04/30" and amount "100"
 	
-  	And I fill in "incomes_from_date" with "2010/01/01"
-    And I fill in "incomes_to_date" with "2010/05/01"
-    And I press "viewIncomesStatsButton"
+  	And I fill in "from_date" with "2010/01/01"
+    And I fill in "to_date" with "2010/05/01"
+    And I select "Income" from "type"
+    And I press "viewStatsButton"
  
  	Then I should see "Ingreso-test1"
  	Then I should see "2010-04-30"
@@ -34,9 +36,10 @@ Feature: Statistics of payments
 	And there is income_received with name "Ingreso-test1" and date "2010/04/30" and amount "100"
 	And there is income_received with name "Ingreso-test2" and date "2010/02/20" and amount "50"
 	
-  	And I fill in "incomes_from_date" with "2010/01/01"
-    And I fill in "incomes_to_date" with "2010/05/01"
-    And I press "viewIncomesStatsButton"
+  	And I fill in "from_date" with "2010/01/01"
+    And I fill in "to_date" with "2010/05/01"
+    And I select "Income" from "type"
+    And I press "viewStatsButton"
  
  	Then I should see "Ingreso-test1"
  	Then I should see "2010-03-30"
@@ -58,8 +61,9 @@ Feature: Statistics of payments
 	And there is income_received with name "Ingreso-test1" and date "2011/04/30" and amount "100"
 	And there is income_received with name "Ingreso-test2" and date "2011/02/20" and amount "50"
 	
-  	And I fill in "incomes_from_date" with "2010/01/01"
-    And I fill in "incomes_to_date" with "2010/05/01"
-    And I press "viewIncomesStatsButton"
+  	And I fill in "from_date" with "2010/01/01"
+    And I fill in "to_date" with "2010/05/01"
+    And I select "Income" from "type"
+    And I press "viewStatsButton"
  
- 	Then I should see "You didn't received any incomes in this period"
+ 	Then I should see "You don't have incomes in this period"

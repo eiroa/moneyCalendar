@@ -27,7 +27,7 @@ module MoneyCalendar
 
     get :login do
       render '/home/login'
-    end  	Then I should see ""
+    end
 
     get :auth, :map => '/auth/:provider/callback' do
       auth    = request.env["omniauth.auth"]
@@ -84,18 +84,15 @@ module MoneyCalendar
     get '/new_income' do
       render 'new_income'
     end
+    
+    get :stats do
+      is_payment = params[:type].eql?('0') ? false : true
+      @transaction_type = is_payment ? 'payments' : 'incomes'
 
-    get :payments_stats do
-      @stats = TransactionDone.payments_from_to(params[:from_date], params[:to_date])
+      @stats = TransactionDone.from_to(params[:from_date], params[:to_date], is_payment)
       @total = @stats.sum(:amount)
       @dates, @data = Stats.dates_and_data_from_to(@stats, params[:from_date], params[:to_date])
-      render 'payments_stats'
-    end
-
-    get :incomes_stats do
-      @stats = TransactionDone.incomes_from_to(params[:incomes_from_date], params[:incomes_to_date])
-      @total = @stats.sum(:amount)
-      render 'incomes_stats'
+      render 'stats'
     end
 
     get :logout do

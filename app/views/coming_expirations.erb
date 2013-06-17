@@ -20,18 +20,15 @@
 				<th>Payment date</th>
 				<th>Confirm payment done</th>
 
-				<% @expirations.each do |pay| %>
+			<% @expirations.each do |pay| %>
 			<tr>
 				<td><%= pay.name %></td>
 				<td><%= pay.pay_date.to_date %></td>
 				<td>
-					
-					<form  action="pay" method="get">
-				    <input type="hidden" name="payment_name" value="<%= pay.name %>">
+				<form  action="pay" method="get">
+					<input type="hidden" name="payment_name" value="<%= pay.name %>">
 					<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
-				    </form>
-				
-			</td>
+				</form></td>
 				<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 			</tr>
 			<% end %>
@@ -46,34 +43,20 @@
 		<form action="new_income" method="get">
 			<input type="submit" value="Add new income" id="addNewIncomeButton" />
 		</form>
+		
 		<div class="well" >
 			<div class="form-horizontal" >
-				<form class="form-horizontal" action="payments_stats" method="get" id="stats">
-					<p>
-						View how many payments I did in a given period of time
-					</p>
-					From date
-					<input type="date" id="from_date" name="from_date" />
-					To date
-					<input type="date" id="to_date" name="to_date" />
-					<input type="submit" value="View stats" id="viewPaymentsStatsButton" />
+				<form action="stats" method="get" id="stats" class="form-horizontal">
+					<p>View how many payments or incomes I did in a given period of time</p>
+					From date <input type="date" id="from_date" name="from_date" />
+					To date <input type="date" id="to_date" name="to_date" />
+					Type <select name="type" id="type">
+						<option value="1">Payments</option>
+						<option value="0">Incomes</option>
+					</select>
+					<input type="submit" value="View stats" id="viewStatsButton" />
 				</form>
 			</div>
-			</div>
-<div class="well" >
-			<div class ="form-horizontal">
-				<form action="incomes_stats" method="get" id="stats">
-					<p>
-						View how many incomes I received in a given period of time
-					</p>
-					From date
-					<input type="date" id="incomes_from_date" name="incomes_from_date" />
-					To date
-					<input type="date" id="incomes_to_date" name="incomes_to_date" />
-					<input type="submit" value="View stats" id="viewIncomesStatsButton" />
-				</form>
-			</div>
-
 		</div>
 	</body>
 </html>
