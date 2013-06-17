@@ -115,8 +115,8 @@ module MoneyCalendar
           params[:description])
 
         @payment.save
-        
-        Transaction.update_date(current_account.id, true, @payment.name)
+        #just saving it again...
+        (Transaction.new_increased_date(current_account.id, true, @payment.name)).save
         render 'save_payment'
    
       rescue TransactionError, TransactionRepeated => e
