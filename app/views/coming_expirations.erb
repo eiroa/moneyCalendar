@@ -1,57 +1,60 @@
+<div align="center">
+	<h1>Upcoming payments</h1>
 
-
-	<div align="center">
-		<h1>Upcoming payments</h1>
-
-		<% if @expirations.empty? %>
-		<p>
-			You don't have upcoming payments
-		</p>
-		<% else %>
-		<table class="table" align="center" border="1">
-			<tr>
-				<th>Payment name</th>
-				<th>Payment date</th>
-				<th>Confirm payment done</th>
+	<% if @expirations.empty? %>
+	<p>You don't have upcoming payments</p>
+	<% else %>
+	<table class="table" align="center" border="1">
+		<tr>
+			<th>Payment name</th>
+			<th>Payment date</th>
+			<th>Confirm payment done</th>
 
 			<% @expirations.each do |pay| %>
-			<tr>
-				<td><%= pay.name %></td>
-				<td><%= pay.pay_date.to_date %></td>
-				<td>
-				<form  action="pay" method="get">
-					<input type="hidden" name="payment_name" value="<%= pay.name %>">
-					<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
-				</form></td>
-				<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
-			</tr>
-			<% end %>
-			</tr>
-		</table>
+		<tr>
+			<td><%= pay.name %></td>
+			<td><%= pay.pay_date.to_date %></td>
+			<td>
+			<form  action="pay" method="get">
+				<input type="hidden" name="payment_name" value="<%= pay.name %>">
+				<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
+			</form></td>
+			<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
+		</tr>
 		<% end %>
+		</tr>
+	</table>
+	<% end %>
 
-		<form action="new_spending" method="get">
-			<input type="submit" value="Add new payment" id="addNewPaymentButton" />
-		</form>
+	<a href="/new_spending">
+	<button class="btn" id="addNewPaymentButton">
+		Add new payment
+	</button></a>
+	<a href="/new_income">
+	<button class="btn" id="addNewIncomeButton">
+		Add new income
+	</button></a>
+	<br>
+	<br>
 
-		<form action="new_income" method="get">
-			<input type="submit" value="Add new income" id="addNewIncomeButton" />
-		</form>
-		
-		<div class="well" >
-			<div class="form-horizontal" >
-				<form action="stats" method="get" id="stats" class="form-horizontal">
-					<p>View how many payments or incomes I did in a given period of time</p>
-					From date <input type="date" id="from_date" name="from_date" value="<%= Date.today %>" />
-					To date <input type="date" id="to_date" name="to_date" value="<%= Date.today + 1 %>" />
-					Type <select name="type" id="type">
-						<option value="1">Payments</option>
-						<option value="0">Incomes</option>
-					</select>
-					<input type="submit" value="View stats" id="viewStatsButton" />
-				</form>
-			</div>
+	<div class="well" >
+		<div class="form-horizontal" >
+			<form action="stats" method="get" id="stats" class="form-horizontal">
+				<p>
+					View how many payments or incomes I did in a given period of time
+				</p>
+				From date
+				<input type="date" id="from_date" name="from_date" value="<%= Date.today %>" />
+				To date
+				<input type="date" id="to_date" name="to_date" value="<%= Date.today + 1 %>" />
+				Type
+				<select name="type" id="type">
+					<option value="1">Payments</option>
+					<option value="0">Incomes</option>
+				</select>
+				<input type="submit" value="View stats" id="viewStatsButton" class="btn"/>
+			</form>
 		</div>
 	</div>
-
+</div>
 
