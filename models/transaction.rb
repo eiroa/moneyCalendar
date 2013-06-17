@@ -37,7 +37,17 @@ class Transaction
     income.is_payment = false
     income
   end
-
+  
+  #Increases Transaction Pay Date according to its predefined perodicity
+  def self.update_date(account_id, is_payment, name)
+    payed = Transaction.find_by_account_id_and_is_payment_and_name(account_id, is_payment, name)  
+    if payed.periodicity == 0
+        payed.destroy
+    else         
+        newDate = payed.pay_date + (payed.periodicity * 30)        
+        payed.update(:pay_date => newDate)
+    end
+  end
   # Params are strings
   def self.create(current_account, is_payment_p, periodicity, name, amount, date, description)
     is_payment = is_payment_p.eql?('0') ? false : true
