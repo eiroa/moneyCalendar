@@ -116,27 +116,9 @@ module MoneyCalendar
 
         @payment.save
         
-        payed = Transaction.first( :account_id => current_account.id, :is_payment => true, :name => @payment.name)
-        if payed.periodicity == 0
-        payed.destroy
-        else
-          
-        newDate = payed.pay_date + (payed.periodicity * 30)
-        
-        payed.update(:pay_date => newDate)
+        Transaction.update_date(current_account.id, true, @payment.name)
         render 'save_payment'
-        
-        ###################### ESTO VA EN EL MODELO, JUNTO CON TESTS #######################
-        #payed = Transaction.find_by_account_id_and_is_payment_and_name(current_account.id, true, @payment.name)
-        #period = payed.periodicity
-        #new_date = Date.new(payed.year + (payed.month + period) / 12, (f.month + period) % 12, f.day)
-        #################### ESTO VA ACA NOMAS A PARTIR DEL @payment.save
-        #payed.update_date(new_date)
-        #render 'save_payment'
-        ######################
-        end
-        
-
+   
       rescue TransactionError, TransactionRepeated => e
         @Message = e.message
         render 'pay'
