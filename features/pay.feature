@@ -10,6 +10,6 @@ Feature: Pay an upcoming Payment
   	Given there is payment with name "Gasto-test0" and date "2015/11/30"
   	And I am on "coming expirations page"
   	And I press "pay_Gasto-test0_button"
-  	And i fill in "paymentDate" with today
-  	And i press "confirmPayment"
-  	Then i should see "The Gasto-test0" payment has been set as payed"
+  	And I fill in "payment_date" with "today"
+  	And I press "confirm_payment"
+  	Then I should see "The Gasto-test0 payment has been set as payed"

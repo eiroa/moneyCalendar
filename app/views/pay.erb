@@ -1,33 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>New Income - Money Calendar</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
+<div align="center">
+	<h1>Confirm your payment</h1>
+	<br>
 
-	<body align="center">
-		<h1>Confirm your payment</h1>
+	<form  action="save_payment" method="get">
+		Payment<input type="text" name="namd" value="<%= @payment.name %>">
 		<br>
-
-		
-	
-		<form  action="save_payment" method="get">
-	    Payment
-		<input type="text" name="namd" value="<%= @payment.name %>"  disabled>
-		<br>
-		Payment date
-		<input type="date" name="payment_date">
+		Payment date<input type="date" name="payment_date">
 		<br>
 
 		<input type="hidden" name="name" value="<%= @payment.name %>"  >
 		<input type="hidden" name="amount" value="<%= @payment.amount %>">
 		<input type="hidden" name="description" value="<%= @payment.description %>">
-		<input type="submit" value="Confirm Payment" class="btn" id="confirm_payment">
-		</form>
-		<a href="/coming_expirations">Return to upcoming payments</a>
-		<% if @Message != nil %>
-		<h2 color="red" allign="center"><%= @Message%></h1>
-		<% end %>
-	</body>
-</html>
+		<input type="submit" value="Confirm Payment" class="btn" name="confirm_payment">
+	</form>
+	
+	<a href="/coming_expirations"><button class="btn">Return to upcoming payments</button></a>
+</div>

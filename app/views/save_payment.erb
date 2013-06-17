@@ -1,31 +1,17 @@
 <div class="well">
 	<div class="centered">
-
-		
 		<h1>New Payment details</h1>
+		
 		<h2> The <%= @payment.name %> payment has been set as payed, you may check it in the stats </h2>
-		<p>
-			Name: <%= @payment.name %>
-		</p>
-		<p>
-			Amount: <%= @payment.amount %>
-		</p>
-		<p>
-			PaymentDate: <%= @payment.pay_date.to_date %>
-		</p>
-		<p>
-			Description: <%= @payment.description %>
-		</p>
+		
+		<p>Name: <%= @payment.name %></p>
+		<p>Amount: <%= @payment.amount %></p>
+		<p>PaymentDate: <%= @payment.pay_date.to_date %></p>
+		<p>Description: <%= @payment.description %></p>
+		
 		<form class="centered" method="get" action='/coming_expirations'>
 			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
 		</form>
-		
-		
-		
-		<% if @errorMessage != nil %>
-		<h2 color="red" allign="center"><%= @errorMessage%></h1>
-		<% end %>
 	</div>
-
 </div>
 

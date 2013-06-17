@@ -88,10 +88,12 @@ module MoneyCalendar
     get :stats do
       is_payment = params[:type].eql?('0') ? false : true
       @transaction_type = is_payment ? 'payments' : 'incomes'
+      @from_date = params[:from_date]
+      @to_date = params[:to_date]
 
-      @stats = TransactionDone.from_to(params[:from_date], params[:to_date], is_payment)
+      @stats = TransactionDone.from_to(@from_date, @to_date, is_payment)
       @total = @stats.sum(:amount)
-      @dates, @data = Stats.dates_and_data_from_to(@stats, params[:from_date], params[:to_date])
+      @dates, @data = Stats.dates_and_data_from_to(@stats, @from_date, @to_date)
       render 'stats'
     end
 
@@ -129,18 +131,16 @@ module MoneyCalendar
 
     get :save_profile do
       @current_account = current_account
-      mail = params[:email]
-      name = params[:name]
       @message = ""
       
       begin
-        @current_account.change_email(mail)
+        @current_account.change_email(params[:email])
       rescue MailFormatError, MailChanged => e
         @message << "#{e.message}"
       end
       
       begin
-        @current_account.change_name(name)
+        @current_account.change_name(params[:name])
       rescue NameChanged => e
         @message << "\n #{e.message}"
       end

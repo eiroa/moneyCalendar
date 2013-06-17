@@ -1,4 +1,4 @@
-@wip
+
 Feature: User profile
   As a user
   I want to be able to edit my profile
@@ -8,13 +8,14 @@ Feature: User profile
 
   Scenario: I want to set my email
   	Given I am on "profile page"
-  	And I fill in "email" with "myemail@me.com"
-    And I press "saveProfileButton"
+  	And I fill in "email" with "myemail_mal@me.com"
+    And I press "saveButton"
+    And I fill in "email" with "myemail@me.com"
+    And I press "saveButton"
     Then I should see "You have changed your email to myemail@me.com"
   
   Scenario: I try to set an invalid email
   	Given I am on "profile page"
   	And I fill in "email" with "pepito"
-    And I press "saveProfileButton"
-    Then I should see "Error, the email address must be set with this format: example@domain.topDomain"
- 
+    And I press "saveButton"
+    Then I should see "Error, the email address must be set with this format: example@domain.com"

@@ -14,7 +14,7 @@
 		<a href="/coming_expirations"><input type="button" value="Cancel" id="returnButton" class="btn" /></a>
 	</form>
 	
-	<% if @message != nil %>
+	<% if ((@message != nil) && (not @message.empty?)) %>
 	<div class="alert centered"><%= @message%></div>
 	<% end %>
 </body>

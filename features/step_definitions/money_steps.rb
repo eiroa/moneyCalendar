@@ -3,6 +3,7 @@ require 'date'
 Given(/^there is payment with name "([^\"]*)" and date "([^\"]*)"$/) do |name, date|
   p = Transaction.payment_for_account(Account.find_by_uid("cucumber_user@someplace.com"))
   p.name = name
+  p.periodicity = 1
   p.pay_date = Date.parse(date)
   p.save
 end
