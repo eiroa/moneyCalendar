@@ -1,20 +1,25 @@
 <body align="center">
-	<h1>Edit your profile preferences</h1>
-	<br>
 
-	<form action="save_profile" method="get">
-		Name
-		<input type="text" name="name" value="<%= @current_account.friendly_name %>">
-		<br>
-		Email
-		<input type="text" name="email" value="<%= @current_account.email %>">
-		<br>
+	<div class="jumbotron">
+		<h1>Edit your profile preferences</h1>
+		<p class="lead"></p>
+		<br/>
+		<span class="span3"> <img src="<%= @current_account.image_l %>" width="200" height="200"> </span>
+		<span class="span6">
+			<form action="save_profile" method="get">
+				Name<input type="text" name="name" value="<%= @current_account.friendly_name %>">
+				<br>
+				Email<input type="text" name="email" value="<%= @current_account.email %>">
+				<br>
 
-		<input type="submit" value="Save" class="btn" id="saveButton">
-		<a href="/coming_expirations"><input type="button" value="Cancel" id="returnButton" class="btn" /></a>
-	</form>
-	
+				<input type="submit" value="Save" class="btn" id="saveButton">
+				<a href="/coming_expirations"><input type="button" value="Cancel" id="returnButton" class="btn" /></a>
+			</form>
+	</div>
+
 	<% if ((@message != nil) && (not @message.empty?)) %>
-	<div class="alert centered"><%= @message%></div>
+	<div class="alert centered">
+		<%= @message%>
+	</div>
 	<% end %>
 </body>
