@@ -42,8 +42,8 @@
 			<div class="form-horizontal" >
 				<form action="stats" method="get" id="stats" class="form-horizontal">
 					<p>View how many payments or incomes I did in a given period of time</p>
-					From date <input type="date" id="from_date" name="from_date" />
-					To date <input type="date" id="to_date" name="to_date" />
+					From date <input type="date" id="from_date" name="from_date" value="<%= Date.today %>" />
+					To date <input type="date" id="to_date" name="to_date" value="<%= Date.today + 1 %>" />
 					Type <select name="type" id="type">
 						<option value="1">Payments</option>
 						<option value="0">Incomes</option>
