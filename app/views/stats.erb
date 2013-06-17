@@ -36,14 +36,12 @@
 	<h4>Total: $<%= @total %></h4>
   <% end %>
 
-  <form action="coming_expirations" method="get">
-    <input type="submit" value="Return" class="btn" id="returnButton" />
-  </form>
+  <a href="/coming_expirations"><button class="btn">Return</button></a>
   
   <form action="stats" method="get" id="stats">
   	<p>View how many payments or incomes I did in a given period of time</p>
-  	From date <input type="date" id="from_date" name="from_date" />
-  	To date <input type="date" id="to_date" name="to_date" />
+  	From date <input type="date" id="from_date" name="from_date" value="<%= @from_date %>" />
+  	To date <input type="date" id="to_date" name="to_date" value="<%= @to_date %>" />
   	Type <select name="type" id="type">
   		<option value="1">Payments</option>
 		<option value="0">Incomes</option>
