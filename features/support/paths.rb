@@ -15,15 +15,12 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
-    when /register payment page/
-      '/new_spending'
-	
-    when /register income page/
-      '/new_income'
       
     when /profile page/
       '/profile'
-    
+      
+    when /register transaction page/
+      '/new_transaction'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

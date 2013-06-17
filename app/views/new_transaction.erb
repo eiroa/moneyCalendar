@@ -1,19 +1,33 @@
 <div align="center">
+	<% if @is_payment.eql?('1') %>
+	<h1>Create a new Payment</h1>
+	<br>
+
+	<h4>Please define the new payment</h4>
+	<br>
+	<% else %>
 	<h1>Create a new Income</h1>
 	<br>
 
 	<h4>Please define the new Income</h4>
 	<br>
 
+	<% end %>
+
 	<form  action="save" method="get">
+
+		<% if @is_payment.eql?('1') %>
+		<input type="hidden" name="is_payment" value="1">
+		<% else %>
 		<input type="hidden" name="is_payment" value="0">
+
+		<% end %>
 		<table border="0" align = "center">
 			<tr>
 				<td>Name</td>
 				<td>
 				<input type="text" name="name">
-				</td>
-
+				
 			</tr>
 
 			<tr>
@@ -24,7 +38,15 @@
 			</tr>
 
 			<tr>
+				<% if @is_payment.eql?('1') %>
+				<td>Payment date</td>
+                  <input type="hidden" name="is_payment" value="1">
+				<% else %>
+				
 				<td>Incoming payment date</td>
+				
+				<input type="hidden" name="is_payment" value="0">
+				<% end %>
 				<td>
 				<input type="date" name="date">
 				</td>
@@ -34,7 +56,12 @@
 				<td>Periodicity</td>
 				<td>
 				<select name="periodicity">
+					<% if @is_payment.eql?('1') %>
+					<OPTION VALUE="0">Single Payment</OPTION>
+					<% else %>
 					<OPTION VALUE="0">Single Income</OPTION>
+					<% end %>
+
 					<OPTION VALUE="1">1 Month</OPTION>
 					<OPTION VALUE="2">2 Months</OPTION>
 					<OPTION VALUE="3">3 Months</OPTION>
@@ -46,13 +73,19 @@
 
 			<tr>
 				<td>Description</td>
+				<% if @is_payment.eql?('1') %>
+
+				<td>				<textarea rows="4" name="description" placeholder="Describe this payment here"></textarea></td>
+				<% else %>
 				<td>				<textarea rows="4" name="description" placeholder="Describe this income here"></textarea></td>
+				
+				<% end %>
+
 			</tr>
 
 			<tr>
 				<td colspan=2 align="center">
 				<input type="submit" value="Save" id="saveButton" class="btn">
-				
 				<a href="/coming_expirations">
 				<input type="button" value="Cancel" id="returnButton" class="btn" />
 				</a></td>
@@ -61,6 +94,6 @@
 	</form>
 
 	<% if @errorMessage != nil %>
-	<h2 color="red" allign="center"><%= @errorMessage%></h1>
+	<h2 color="red" align="center"><%= @errorMessage%></h2>
 	<% end %>
 </div>
