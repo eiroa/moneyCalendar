@@ -27,7 +27,7 @@ module MoneyCalendar
 
     get :login do
       render '/home/login'
-    end  	Then I should see ""
+    end  	
 
     get :auth, :map => '/auth/:provider/callback' do
       auth    = request.env["omniauth.auth"]
