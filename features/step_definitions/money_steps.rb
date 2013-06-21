@@ -64,3 +64,12 @@ Given(/^there is income_received with name "([^\"]*)" and date "([^\"]*)" and am
   p.save
 end
 
+Given(/^(?:|I )visit the register payment page$/) do
+  step %{I am on "coming expirations page"}
+  step %{I press "addNewPaymentButton"}
+end
+
+Given(/^(?:|I )visit the register income page$/) do
+  step %{I am on "coming expirations page"}
+  step %{I press "addNewIncomeButton"}
+end

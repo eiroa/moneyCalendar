@@ -2,7 +2,9 @@
 	<h1>Upcoming payments</h1>
 
 	<% if @expirations.empty? %>
-	<p>You don't have upcoming payments</p>
+	<p>
+		You don't have upcoming payments
+	</p>
 	<% else %>
 	<table class="table" align="center" border="1">
 		<tr>
@@ -25,15 +27,15 @@
 		</tr>
 	</table>
 	<% end %>
+	<form  action="/new_transaction" method="get">
+		<input type="hidden" name="is_payment" value="1">
+		<input class="btn" type="submit" value="Add new payment" id="addNewPaymentButton">
+	</form></td>
+	<form  action="new_transaction" method="get">
+		<input type="hidden" name="is_payment" value="0">
+		<input class="btn" type="submit" value="Add new income" id="addNewIncomeButton">
+	</form></td>
 
-	<a href="/new_spending">
-	<button class="btn" id="addNewPaymentButton">
-		Add new payment
-	</button></a>
-	<a href="/new_income">
-	<button class="btn" id="addNewIncomeButton">
-		Add new income
-	</button></a>
 	<br>
 	<br>
 

@@ -42,7 +42,7 @@ module MoneyCalendar
     access_control.roles_for :any do |role|
       role.protect "/coming_expirations"
       role.protect "/save_payment"
-      role.protect "/new_spending"
+      role.protect "/new_transaction"
       role.protect "/profile"
     end
 
@@ -73,17 +73,18 @@ module MoneyCalendar
 
       rescue TransactionError, TransactionRepeated => e
         @errorMessage = e.message
-        render 'new_spending'
+        render 'new_transaction'
       end
     end
 
-    get '/new_spending' do
-      render 'new_spending'
+  
+    
+    get '/new_transaction' do
+      @is_payment = params[:is_payment]
+      render 'new_transaction'
     end
 
-    get '/new_income' do
-      render 'new_income'
-    end
+   
     
     get :stats do
       is_payment = params[:type].eql?('0') ? false : true
@@ -115,8 +116,8 @@ module MoneyCalendar
           params[:description])
 
         @payment.save
-        
-        Transaction.update_date(current_account.id, true, @payment.name)
+        #just saving it again...
+        (Transaction.new_increased_date(current_account.id, true, @payment.name)).save
         render 'save_payment'
    
       rescue TransactionError, TransactionRepeated => e
