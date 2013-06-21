@@ -20,7 +20,8 @@ Feature: Create new Payment
 
   @wip
   Scenario: Happy Path to Payment with notification
-    Given I visit the register payment page
+    Given I have an email associated with my account
+    And I visit the register payment page
     And I fill in "name" with "Gasto-test"
     And I fill in "amount" with "1000"
     And I fill in "date" with "2020/1/1"
@@ -92,7 +93,21 @@ Feature: Create new Payment
     And I fill in with a previous date than today "date"
     When I press "saveButton"
     Then I should see "Error, invalid date"
-  
+
+  @wip
+  Scenario: Notifications cannot be activated unless there's an email associated
+    Given I don't have an email associated with my account
+    And I visit the register payment page
+    And I fill in "name" with "Gasto-test"
+    And I fill in "amount" with "1000"
+    And I fill in "date" with "2020/1/1"
+    And I select "1 Month" from "periodicity"
+    And I check "notify"
+    And I fill in "advance_notify" with "1"
+    And I fill in "time_notify with "9:00"  
+    When I press "saveButton"
+    Then I should see "Error, you must specify an email address in the profile section in order to receive notifications"
+
   @wip
   Scenario: Time in Advance is negative
     Given I visit the register payment page
