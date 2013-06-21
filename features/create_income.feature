@@ -53,4 +53,16 @@ Feature: Create new Payment
     And I select "1 Month" from "periodicity"
     And I fill in with a previous date than today "date"
     When I press "saveButton"
-    Then I should see "Error, invalid date"  
+    Then I should see "Error, invalid date"
+    
+  @wip
+  Scenario: Time in Advance is negative
+    Given I am on "register income page"
+    And I fill in "name" with "Gasto-test"
+    And I select "1 Month" from "periodicity"
+    And I fill in "date" with "2013/11/21"
+    And I check "notify"
+    And I fill in "advance_notify" with "-1"
+    And I fill in "time_notify with "9:00"
+    When I press "saveButton"
+    Then I should see "Error, invalid time in advance"
