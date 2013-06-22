@@ -1,6 +1,6 @@
 db/money_development.db
 db/money_test.db
-
+emailCredentials
 .project
 .settings
 :memory
