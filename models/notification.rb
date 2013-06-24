@@ -10,6 +10,7 @@ class Notification
   has 1, :email, :constraint => :destroy
   belongs_to :transaction
 
+  #params => (Transaction, Integer, String, Account)
   def self.add_new(transaction, advance_days, hour, account)
      new_notification = self.new
 
@@ -22,13 +23,15 @@ class Notification
      return new_notification
   end
 
+  #params => (DateTime, String)
   def update(pay_date, transaction_name)
-     new_date = pay_date - self.advance_notify
+     new_date = pay_date - self.advance_notify.day
      self.notify_date = DateTime.new(new_date.year, new_date.month, new_date.day, self.notify_date.hour,       
                                      self.notify_date.minute, 0, 0)
      self.email = self.new_email(transaction_name, pay_date, self.email.to)
   end
   
+  #params => (DateTime, Integer, String)
   def calculate_date(date, advance_days, hour)
    new_date = date - advance_days.day
    DateTime.new(new_date.year, new_date.month, new_date.day, hour[0..1].to_i, hour[3..4].to_i, 0, 0)
@@ -39,6 +42,7 @@ class Notification
       return account.email
   end
 
+  #params => (String, DateTime, String)
   def new_email(transaction_name, transaction_pay_date, email_account)
       email = Email.new
       email.to = email_account
