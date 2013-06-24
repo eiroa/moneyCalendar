@@ -31,6 +31,7 @@ gem 'dm-types'
 gem 'dm-core'
 gem 'dm-ar-finders'
 gem 'tilt', '1.3.7'
+gem 'whenever', :require => false
 
 # Test requirements
 gem 'dm-sqlite-adapter', :group => 'test' 
