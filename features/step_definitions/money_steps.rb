@@ -88,4 +88,20 @@ Given(/^I don't have an email associated with my account$/) do
    account.update(:email => nil)
 end
 
+Given(/^there is payment with name "(.*?)" and a notification has been sent remembering its payment$/) do |name|
+  account = Account.find_by_uid("cucumber_user@someplace.com")  
+  t = Transaction.new
+  t.name = name
+  t.pay_date = DateTime.now + 1
+  t.amount = 200
+  t.is_payment = true
+  n = Notification.add_new(t, 1, "12:00", account)
+  n.send_mail
+end
+
+Then(/^I read the "(.*?)" and I should see "(.*?)" now$/) do |file, text|
+   date = DateTime.now.to_s 
+   log_text = text + date[0..9] + ", " + date[11..15]
+  (File.readlines(file).any?{ |l| l[log_text] }).should eq true
+end
 
