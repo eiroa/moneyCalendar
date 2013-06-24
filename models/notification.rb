@@ -51,4 +51,8 @@ class Notification
   def check_advance_notify(advance_days)
       raise TransactionError.new("Error, invalid time in advance") if advance_days < 0
    end
+
+  def send_mail
+      email(:to => self.email.to, :subject => self.email.subject, :body=> self.email.body)
+  end
 end

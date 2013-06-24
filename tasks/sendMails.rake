@@ -6,9 +6,7 @@ namespace :mails do
       notifications = Array.new
       all_notifications.each do |n|
          if same_day_and_time?(n.notify_date, today)
-            email = n.email
-            #email(:to => email.to, :subject => email.subject, :body=> email.body)
-            File.open('logs/mail.log', 'w') { |file| file.write("Mail enviado!") }
+            n.send_mail
          end
       end
    end
