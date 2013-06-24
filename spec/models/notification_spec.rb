@@ -50,5 +50,24 @@ describe Notification do
     notification = Notification.new
     lambda{notification.check_advance_notify(-1)}.should raise_error
     end
+    
+    it 'should not raise an exception when notification advance time is positive' do
+    notification = Notification.new
+    lambda{notification.check_advance_notify(1)}.should_not raise_error
+    end
+  end
+  describe 'check_email_account' do
+    it 'should raise an exception when email address is empty' do
+    notification = Notification.new
+    acc= Account.new
+    lambda{notification.check_email_account(acc)}.should raise_error
+    end
+    
+    it 'should not raise an exception when email address is not empty' do
+    notification = Notification.new
+    acc= Account.new
+    acc.email= 'roberto_perez@rpmail.com'
+    lambda{notification.check_email_account(acc)}.should_not raise_error
+    end
   end
 end

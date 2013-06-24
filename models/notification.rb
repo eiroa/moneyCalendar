@@ -58,6 +58,9 @@ class Notification
    end
 
   def send_mail
-      email(:to => self.email.to, :subject => self.email.subject, :body=> self.email.body)
+    #email(:to => self.email.to, :subject => self.email.subject, :body=> self.email.body)
+    open('logs/mail.log', 'a') do |f|
+    f.puts "email to:"+self.email.to + " sent at:" + DateTime.now.to_s
+    end
   end
 end
