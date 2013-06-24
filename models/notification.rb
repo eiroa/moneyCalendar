@@ -1,3 +1,4 @@
+require 'active_support/all'
 class Notification
   include DataMapper::Resource
 
