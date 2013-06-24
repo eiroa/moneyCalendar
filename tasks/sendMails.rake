@@ -7,12 +7,13 @@ namespace :mails do
       all_notifications.each do |n|
          if same_day_and_time?(n.notify_date, today)
             email = n.email
-            email(:to => email.to, :subject => email.subject, :body=> email.body)
+            #email(:to => email.to, :subject => email.subject, :body=> email.body)
+            File.open('logs/mail.log', 'w') { |file| file.write("Mail enviado!") }
          end
       end
    end
 end
 
 def same_day_and_time?(date, today)
-   date.year == today.year && date.month == today.month && date.day == today.day && date.hour == today.hour && date.minute = today.minute
+   date.year == today.year && date.month == today.month && date.day == today.day && date.hour == today.hour && date.minute == today.minute
 end
