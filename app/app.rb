@@ -164,13 +164,6 @@ module MoneyCalendar
       render 'profile'
     end
 
-  get :sendmail do
-    render 'email'
-  end
-  post :email do
-      email(:from => "fmmainere@gmail.com", :to => "fmmainere@gmail.com", :subject => "Welcome!", :body=>"Body")
-  end
-
     ##
     # Caching support
     #
