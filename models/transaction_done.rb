@@ -8,21 +8,20 @@ class TransactionDone
   property :pay_date, DateTime
   property :description, String
   property :is_payment, Boolean
-  #property :transaction_id, Integer
+  property :transaction_id, Integer
 
   belongs_to :account
-  has 1, :notification
   
   def get_name
     return name if name != nil
     return Transaction.find_by_id(transaction).name
   end
   
-#  def self.for_transaction(transaction)
-#    done = TransactionDone.new
-#    done.transaction_id = transaction.id
-#    done
-#  end
+  def self.for_transaction(transaction)
+    done = TransactionDone.new
+    done.transaction_id = transaction.id
+    done
+  end
   
   def self.for_account(account)
     done = TransactionDone.new

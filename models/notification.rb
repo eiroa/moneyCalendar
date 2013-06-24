@@ -6,9 +6,8 @@ class Notification
   property :notify_date, DateTime
   property :advance_notify, Integer
   
-  has 1, :email
+  has 1, :email, :constraint => :destroy
   belongs_to :transaction
-  belongs_to :transaction_done
 
   def self.add_new(transaction, advance_days, hour, account)
      new_notification = self.new

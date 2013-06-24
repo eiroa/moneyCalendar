@@ -81,7 +81,9 @@ module MoneyCalendar
           one_is_empty(params[:time_notify], params[:advance_notify])
           @advance_notify = params[:advance_notify]
           new_notification = Notification.add_new(@transaction, @advance_notify, params[:time_notify], current_account)
-          @transaction.notification = new_notification
+           if ! @periodicity.eql?('0')
+              @transaction.notification = new_notification
+           end
         end
  
         @transaction.save

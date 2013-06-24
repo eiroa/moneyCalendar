@@ -11,7 +11,7 @@ class Transaction
   property :is_payment, Boolean
 
   belongs_to :account
-  has 1, :notification
+  has 1, :notification, :constraint => :destroy
 
   def self.for_account(account)
     t = Transaction.new
