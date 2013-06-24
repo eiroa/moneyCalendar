@@ -21,6 +21,11 @@
 		<p>
 			Description: <%= @transaction.description %>
 		</p>
+      </br>
+      <% if @notify %>
+			<p>You will receive a notification <%= @advance_notify %> day/s before </p>
+         <p>the <%= @transaction.pay_date.to_date %> remembering you to pay it. </p>
+      <% end %>
 		<form class="centered" method="get" action='/coming_expirations'>
 			<input type="submit" class="btn big" id="returnNew" value="Return to upcoming payments" />
 		</form>

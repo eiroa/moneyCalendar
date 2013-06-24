@@ -9,7 +9,10 @@ class Transaction
   property :periodicity, Integer
   property :description, String
   property :is_payment, Boolean
+
   belongs_to :account
+  has 1, :notification
+
   def self.for_account(account)
     t = Transaction.new
     t.account = account
@@ -43,8 +46,10 @@ class Transaction
     payed = Transaction.find_by_account_id_and_is_payment_and_name(account_id, is_payment, name)  
     if payed.periodicity == 0
         payed.destroy
-    else         
-        payed.pay_date =  payed.pay_date + (payed.periodicity * 30)
+    else   
+        new_date = payed.pay_date + (payed.periodicity * 30)     
+        payed.pay_date = new_date
+        payed.notification.update(new_date, payed.name)
         return payed
                
         #payed.update(:pay_date => newDate)

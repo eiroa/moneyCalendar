@@ -75,7 +75,15 @@ module MoneyCalendar
         @transaction = Transaction.create(current_account, @is_payment, @periodicity,
           params[:name], params[:amount], params[:date],
           params[:description])
-
+        
+        @notify = params[:notify]
+        if(@notify)
+          one_is_empty(params[:time_notify], params[:advance_notify])
+          @advance_notify = params[:advance_notify]
+          new_notification = Notification.add_new(@transaction, @advance_notify, params[:time_notify], current_account)
+          @transaction.notification = new_notification
+        end
+ 
         @transaction.save
         render 'save'
 
@@ -119,13 +127,8 @@ module MoneyCalendar
     get :save_payment do
 
       begin
-        @payment = Transaction.create(current_account, true, '0',
-          params[:name], params[:amount], params[:payment_date],
-          params[:description])
-
+        @payment = Transaction.new_increased_date(current_account.id, true, params[:name])
         @payment.save
-        #just saving it again...
-        (Transaction.new_increased_date(current_account.id, true, @payment.name)).save
         render 'save_payment'
    
       rescue TransactionError, TransactionRepeated => e

@@ -38,6 +38,10 @@ Given(/^there are not payments_done$/) do
   TransactionDone.destroy
 end
 
+Given(/^there are not notifications$/) do
+  Notification.destroy
+end
+
 Given(/^there are not incomes_received$/) do
   TransactionDone.destroy
 end
@@ -73,3 +77,15 @@ Given(/^(?:|I )visit the register income page$/) do
   step %{I am on "coming expirations page"}
   step %{I press "addNewIncomeButton"}
 end
+
+Given(/^I have an email associated with my account$/) do
+  account =  Account.find_by_uid("cucumber_user@someplace.com")
+  account.update(:email => "cucumber_user@someplace.com")
+end
+
+Given(/^I don't have an email associated with my account$/) do
+   account =  Account.find_by_uid("cucumber_user@someplace.com")
+   account.update(:email => nil)
+end
+
+

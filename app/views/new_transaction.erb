@@ -65,7 +65,20 @@
 					<option value="12">1 Year</option>
 				</select></td>
 			</tr>
-
+         <% if @is_payment.eql?('1') %>
+         <tr> 
+            <td></td>
+            <td><input type="checkbox" name="notify" value="true"/> Receive notification?</td>
+         </tr>
+         <tr> 
+            <td></td>
+            <td>Quantity of days previous  <input type="number" name="advance_notify" class="tiny"></td>
+         </tr>
+         <tr> 
+            <td></td>
+            <td>Hour of notification  <input type="time" name="time_notify" class="tiny"></td>
+         </tr>
+         <% end %>
 			<tr>
 				<td>Description</td>
 				<% if @is_payment.eql?('1') %>
