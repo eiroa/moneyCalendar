@@ -102,11 +102,11 @@ describe Transaction do
       '1',  'name').and_return(@transaction)
     end
     
-#    it 'should increase a transaction pay_date by its periodicity' do
-#      target = Transaction.create(@account, '1', '1', 'name', 50, Date.today, 'myDescription')    
-#      paymentUpdated = Transaction.new_increased_date(1,'1','name')
-#      paymentUpdated.pay_date.should eq Date.today + 30
-#    end
+    it 'should increase a transaction pay_date by its periodicity' do
+      target = Transaction.create(@account, '1', '1', 'name', 50, Date.today, 'myDescription')    
+      paymentUpdated = Transaction.new_increased_date(1,'1','name')
+      paymentUpdated.pay_date.should eq Date.today + 30
+    end
   end
   describe 'get_last_sorted' do
     it 'should return [] if there are no transactions' do

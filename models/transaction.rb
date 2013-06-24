@@ -49,7 +49,9 @@ class Transaction
     else   
         new_date = payed.pay_date + (payed.periodicity * 30)     
         payed.pay_date = new_date
-        payed.notification.update(new_date, payed.name)
+        if ! payed.notification.nil?
+            payed.notification.update(new_date, payed.name)
+        end
         return payed
                
         #payed.update(:pay_date => newDate)
