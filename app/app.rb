@@ -22,9 +22,8 @@ module MoneyCalendar
       use OmniAuth::Builder do
         provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_SECRET_KEY']
       end
+      set :login_page, "/auth/twitter"
     end
-    
-    set :login_page, "/auth/twitter"
     
     # To send mails
     set :delivery_method, :smtp => {
