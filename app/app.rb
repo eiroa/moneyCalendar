@@ -22,7 +22,11 @@ module MoneyCalendar
       use OmniAuth::Builder do
         provider :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_SECRET_KEY']
       end
-      set :login_page, "/auth/twitter"
+    end
+    
+    set :login_page, "/auth/twitter"
+    
+    # To send mails
     set :delivery_method, :smtp => {
         :address              => "smtp.gmail.com",
         :port                 => 587,
@@ -31,7 +35,6 @@ module MoneyCalendar
         :authentication       => :plain,
         :enable_starttls_auto => true
     }
-    end
 
     get :login do
       render '/home/login'

@@ -15,3 +15,6 @@ end
 # You can handle all padrino applications using instead:
 #   Padrino.application
 Capybara.app = MoneyCalendar::App.tap { |app|  }
+
+ENV['GMAIL_ADDRESS'] = 'pepe@gmail.com'
+ENV['GMAIL_PASSWORD'] = 'pepe1234'

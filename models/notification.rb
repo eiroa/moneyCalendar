@@ -61,7 +61,7 @@ class Notification
     #email(:to => self.email.to, :subject => self.email.subject, :body=> self.email.body)
     now = DateTime.now.to_s
     open('logs/mail.log', 'a') do |f|
-    f.puts "Email to: "+ self.email.to + " sent at: " + now[0..9] + ", " + now[11..15]
+      f.puts "Email to: "+ self.email.to + " sent at: " + now[0..9] + ", " + now[11..15]
     end
   end
 end
