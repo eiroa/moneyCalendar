@@ -112,7 +112,7 @@ module MoneyCalendar
       @from_date = params[:from_date]
       @to_date = params[:to_date]
 
-      @stats = TransactionDone.from_to(@from_date, @to_date, is_payment)
+      @stats = TransactionDone.from_to(current_account.id, @from_date, @to_date, is_payment)
       @total = @stats.sum(:amount)
       @dates, @data = Stats.dates_and_data_from_to(@stats, @from_date, @to_date)
       render 'stats'

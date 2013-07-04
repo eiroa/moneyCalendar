@@ -56,7 +56,7 @@ class TransactionDone
   end
 
   # To view stats 
-  def self.from_to(from_date, to_date, is_payment)
-    return TransactionDone.all(:pay_date.gt => from_date, :pay_date.lt => to_date, :is_payment => is_payment)
+  def self.from_to(account_id, from_date, to_date, is_payment)
+    return TransactionDone.all(:account_id => account_id,:pay_date.gt => from_date, :pay_date.lt => to_date, :is_payment => is_payment)
   end
 end
