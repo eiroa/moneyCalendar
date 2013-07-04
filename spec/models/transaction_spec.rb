@@ -4,23 +4,7 @@ describe Transaction do
 
   describe 'create(current_account, is_payment_p, periodicity, name, amount, date, description)' do
 
-    describe 'and periodicity = "0"' do
-      before(:each) do
-        @transaction = TransactionDone.new
-        @account = Account.new
-        TransactionDone.should_receive(:for_account).with(@account).and_return(@transaction)
-      end
-
-      it 'should return a Payment-TransactionDone when is_payment = true' do
-        result = Transaction.create(@account, '1', '0', 'name', 100, Date.today, 'description')
-        result.should be_an_instance_of(TransactionDone)
-      end
-
-      it 'should return a Income-TransactionDone when is_payment = false' do
-        result = Transaction.create(@account, '0', '0', 'name', 100, Date.today, 'description')
-        result.should be_an_instance_of(TransactionDone)
-      end
-    end
+   
 
     describe 'and periodicity != 0' do
       before(:each) do
@@ -104,7 +88,7 @@ describe Transaction do
     
     it 'should increase a transaction pay_date by its periodicity' do
       target = Transaction.create(@account, '1', '1', 'name', 50, Date.today, 'myDescription')    
-      paymentUpdated = Transaction.new_increased_date(1,'1','name')
+      paymentUpdated = Transaction.update_with_increased_date(1,'1','name')
       paymentUpdated.pay_date.should eq Date.today + 30
     end
   end

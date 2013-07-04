@@ -137,7 +137,12 @@ module MoneyCalendar
         @payment.save
         
         # Updating transaction date
-          Transaction.update_with_increased_date(current_account.id, true, @payment.name)
+        if transaction.periodicity == 0
+          transaction.destroy
+        else
+          (Transaction.update_with_increased_date(current_account.id, true, @payment.name)).save
+        end
+          
         
         render 'save_payment'
 

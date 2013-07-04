@@ -24,14 +24,14 @@ describe TransactionDone do
     end
   end
 
-  describe 'payments_from_to(from_date, to_date)' do
+  describe 'payments_from_to(account_id,from_date, to_date)' do
     it 'should return a empty list of TransactionDone when there are not payments between specified dates' do
       date1 = Date.today
       date2 = Date.today + 1
 
-      TransactionDone.should_receive(:from_to).with(Date.today, Date.today + 1, true).and_return([])
+      TransactionDone.should_receive(:from_to).with(1, Date.today, Date.today + 1, true).and_return([])
 
-      result = TransactionDone.from_to(Date.today, Date.today + 1,true)
+      result = TransactionDone.from_to(1, Date.today, Date.today + 1,true)
       result.should eq []
     end
   end
@@ -41,21 +41,21 @@ describe TransactionDone do
       date1 = Date.today
       date2 = Date.today + 1
 
-      TransactionDone.should_receive(:from_to).with(Date.today, Date.today + 1, false).and_return([])
+      TransactionDone.should_receive(:from_to).with(1,Date.today, Date.today + 1, false).and_return([])
 
-      result = TransactionDone.from_to(Date.today, Date.today + 1,false)
+      result = TransactionDone.from_to(1, Date.today, Date.today + 1,false)
       result.should eq []
     end
   end
 
-  describe 'from_to(from_date, to_date)' do
+  describe 'from_to(account_id,from_date, to_date)' do
     it 'should return a empty list of TransactionDone when there are not payments between specified dates' do
       date1 = Date.today
       date2 = Date.today + 1
 
-      TransactionDone.should_receive(:all).with(:pay_date.gt => date1, :pay_date.lt => date2, :is_payment => true).and_return([])
+      TransactionDone.should_receive(:all).with(:account_id =>1, :pay_date.gt => date1, :pay_date.lt => date2, :is_payment => true).and_return([])
 
-      result = TransactionDone.from_to(date1, date2, true)
+      result = TransactionDone.from_to(1, date1, date2, true)
       result.should eq []
     end
     
@@ -63,9 +63,9 @@ describe TransactionDone do
       date1 = Date.today
       date2 = Date.today + 1
 
-      TransactionDone.should_receive(:all).with(:pay_date.gt => date1, :pay_date.lt => date2, :is_payment => false).and_return([])
+      TransactionDone.should_receive(:all).with(:account_id =>1, :pay_date.gt => date1, :pay_date.lt => date2, :is_payment => false).and_return([])
 
-      result = TransactionDone.from_to(date1, date2, false)
+      result = TransactionDone.from_to(1, date1, date2, false)
       result.should eq []
     end
   end

@@ -48,20 +48,7 @@ Feature: Create new Payment
     When I press "saveButton"
     Then I should see "Error, name is required"
     
-  Scenario: PaymentDone already exists
-    Given I visit the register payment page
-    And I fill in "name" with "Gasto-test"
-    And I fill in "amount" with "1000"
-    And I fill in "date" with "2014/10/21"
-    And I select "Single" from "periodicity"
-    And I press "saveButton"
-    
-    And I visit the register payment page
-    And I fill in "name" with "Gasto-test"
-    And I fill in "amount" with "5000"
-    And I fill in "date" with "2013/11/21"
-    And I press "saveButton"
-    Then I should see "The Gasto-test payment has been registered"
+  
 
   Scenario: Payment already exists
     Given I visit the register payment page

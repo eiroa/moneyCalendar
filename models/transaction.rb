@@ -12,7 +12,6 @@ class Transaction
 
   belongs_to :account
   has 1, :notification, :constraint => :destroy
-
   def self.for_account(account)
     t = Transaction.new
     t.account = account
@@ -40,35 +39,32 @@ class Transaction
     income.is_payment = false
     income
   end
-  
+
   #Increases Transaction Pay Date according to its predefined perodicity
   def self.update_with_increased_date(account_id, is_payment, name)
-    payed = Transaction.find_by_account_id_and_is_payment_and_name(account_id, is_payment, name)  
-    if payed.periodicity == 0
-        payed.destroy
-    else   
-        new_date = payed.pay_date + (payed.periodicity * 30)     
-        payed.pay_date = new_date
-        if ! payed.notification.nil?
-            payed.notification.update(new_date, payed.name)
-        end
-        payed.save
-               
-        #payed.update(:pay_date => newDate)
+    payed = Transaction.find_by_account_id_and_is_payment_and_name(account_id, is_payment, name)
+
+    new_date = payed.pay_date + (payed.periodicity * 30)
+    payed.pay_date = new_date
+    if ! payed.notification.nil?
+    payed.notification.update(new_date, payed.name)
     end
+
+    return payed
   end
+
   # Params are strings
   def self.create(current_account, is_payment_p, periodicity, name, amount, date, description)
     is_payment = is_payment_p.eql?('0') ? false : true
-  
-      repeated = Transaction.all(:account_id => current_account.id)
-        .first(:name => name, :is_payment => is_payment)
 
-      raise TransactionRepeated if repeated != nil
+    repeated = Transaction.all(:account_id => current_account.id)
+    .first(:name => name, :is_payment => is_payment)
 
-      transaction = Transaction.for_account(current_account)
-      transaction.pay_date = date
-      transaction.periodicity = periodicity
+    raise TransactionRepeated if repeated != nil
+
+    transaction = Transaction.for_account(current_account)
+    transaction.pay_date = date
+    transaction.periodicity = periodicity
 
     transaction.name = name
     transaction.amount = amount
