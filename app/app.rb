@@ -131,10 +131,16 @@ module MoneyCalendar
     get :save_payment do
 
       begin
-        @payment = Transaction.new_increased_date(current_account.id, true, params[:name])
+        # Create transaction done for payed transaction
+        @payment = Transaction.create(current_account, true, '0',
+          params[:name], params[:amount], params[:payment_date],
+          params[:description])
         @payment.save
+        
+        # Updating transaction date
+        (Transaction.new_increased_date(current_account.id, true, @payment.name)).save
         render 'save_payment'
-   
+
       rescue TransactionError, TransactionRepeated => e
         @Message = e.message
         render 'pay'
