@@ -132,13 +132,13 @@ module MoneyCalendar
 
       begin
         # Create transaction done for payed transaction
-        @payment = Transaction.create(current_account, true, '0',
-          params[:name], params[:amount], params[:payment_date],
-          params[:description])
+        transaction = Transaction.find_by_account_id_and_name(current_account.id,params[:name])
+        @payment = TransactionDone.create(current_account, transaction)
         @payment.save
         
         # Updating transaction date
-        (Transaction.new_increased_date(current_account.id, true, @payment.name)).save
+          Transaction.update_with_increased_date(current_account.id, true, @payment.name)
+        
         render 'save_payment'
 
       rescue TransactionError, TransactionRepeated => e

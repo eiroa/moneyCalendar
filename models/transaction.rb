@@ -42,7 +42,7 @@ class Transaction
   end
   
   #Increases Transaction Pay Date according to its predefined perodicity
-  def self.new_increased_date(account_id, is_payment, name)
+  def self.update_with_increased_date(account_id, is_payment, name)
     payed = Transaction.find_by_account_id_and_is_payment_and_name(account_id, is_payment, name)  
     if payed.periodicity == 0
         payed.destroy
@@ -52,7 +52,7 @@ class Transaction
         if ! payed.notification.nil?
             payed.notification.update(new_date, payed.name)
         end
-        return payed
+        payed.save
                
         #payed.update(:pay_date => newDate)
     end
@@ -60,11 +60,7 @@ class Transaction
   # Params are strings
   def self.create(current_account, is_payment_p, periodicity, name, amount, date, description)
     is_payment = is_payment_p.eql?('0') ? false : true
-
-    if periodicity.eql?('0')
-      transaction = TransactionDone.for_account(current_account)
-      transaction.pay_date = date
-    else
+  
       repeated = Transaction.all(:account_id => current_account.id)
         .first(:name => name, :is_payment => is_payment)
 
@@ -73,7 +69,6 @@ class Transaction
       transaction = Transaction.for_account(current_account)
       transaction.pay_date = date
       transaction.periodicity = periodicity
-    end
 
     transaction.name = name
     transaction.amount = amount

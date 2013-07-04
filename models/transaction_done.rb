@@ -12,6 +12,17 @@ class TransactionDone
 
   belongs_to :account
   
+  def self.create(current_account, transaction)
+    transaction_done = TransactionDone.for_account(current_account)
+    transaction_done.pay_date = transaction.pay_date
+    transaction_done.name = transaction.name
+    transaction_done.amount = transaction.amount
+    transaction_done.is_payment = transaction.is_payment
+    transaction_done.description = transaction.description
+    return transaction_done
+  end
+  
+  
   def get_name
     return name if name != nil
     return Transaction.find_by_id(transaction).name
@@ -55,6 +66,8 @@ class TransactionDone
     end
   end
 
+  
+  
   # To view stats 
   def self.from_to(account_id, from_date, to_date, is_payment)
     return TransactionDone.all(:account_id => account_id,:pay_date.gt => from_date, :pay_date.lt => to_date, :is_payment => is_payment)
