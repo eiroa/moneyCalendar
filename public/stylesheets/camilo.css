@@ -12,6 +12,10 @@ footer {
     text-align: center;
 }
 
+.inlining {
+	display: inline-block;
+}
+
 .big {
     height: 45px;
     min-width: 100px;
