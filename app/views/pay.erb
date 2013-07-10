@@ -1,13 +1,13 @@
 <div align="center">
-	<h1>Confirm your payment</h1>
+	<h1>Confirm <% if @is_payment == 1 %>payment<% else %>income received<%end%></h1>
 	<br>
 
 	<form  action="save_payment" method="get">
-		Payment name:  <input type="text" name="label" value="<%= @payment.name %>" disabled>
+		<% if @is_payment == 1 %>Payment<% else %>Income<%end%> name:  <input type="text" name="label" value="<%= @payment.name %>" disabled>
 		<br>
-		Payment date:  <input type="date" name="payment_date" value="<%=Date.today %>">
+		<% if @is_payment == 1%>Payment<% else %>Income<%end%> date:  <input type="date" name="payment_date" value="<%=Date.today %>">
 		<br>
-
+		<input type="hidden" name="is_payment" value=" <%= @is_payment %>">
 		<input type="hidden" name="name" value="<%= @payment.name %>"  >
 		<input type="hidden" name="amount" value="<%= @payment.amount %>">
 		<input type="hidden" name="description" value="<%= @payment.description %>">

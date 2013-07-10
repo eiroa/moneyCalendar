@@ -19,8 +19,8 @@ class Transaction
   end
 
   # Return "cant" transactions sorted by pay_date
-  def self.get_last_sorted(cant, account_id)
-    payments = Transaction.all(:account_id => account_id, :is_payment => true, :pay_date.gte => Date.today)
+  def self.get_last_sorted(cant, account_id,is_payment)
+    payments = Transaction.all(:account_id => account_id, :is_payment => is_payment, :pay_date.gte => Date.today)
     return (payments.sort! { |a,b| a.pay_date <=> b.pay_date })[0..cant-1]
   end
 

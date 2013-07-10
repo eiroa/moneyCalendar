@@ -24,7 +24,7 @@ module MoneyCalendar
       end
       set :login_page, "/auth/twitter"
     end
-    
+
     # To send mails
     set :delivery_method, :smtp => {
         :address              => "smtp.gmail.com",
@@ -65,10 +65,17 @@ module MoneyCalendar
     end
 
     get :coming_expirations do
-      @expirations = Transaction.get_last_sorted(10, current_account.id)
+      @expirations = Transaction.get_last_sorted(10, current_account.id,true)
+      @payments = true
       render 'coming_expirations'
     end
 
+    get :coming_incomes do
+      @expirations = Transaction.get_last_sorted(10, current_account.id,false)
+      @payments = false
+      render 'coming_expirations'
+    end
+    
     get '/save' do
       @is_payment = params[:is_payment]
       @periodicity =  params[:periodicity]
@@ -77,17 +84,17 @@ module MoneyCalendar
         @transaction = Transaction.create(current_account, @is_payment, @periodicity,
           params[:name], params[:amount], params[:date],
           params[:description])
-        
+
         @notify = params[:notify]
         if(@notify)
           one_is_empty(params[:time_notify], params[:advance_notify])
           @advance_notify = params[:advance_notify]
           new_notification = Notification.add_new(@transaction, @advance_notify, params[:time_notify], current_account)
-           if ! @periodicity.eql?('0')
-              @transaction.notification = new_notification
-           end
+          if ! @periodicity.eql?('0')
+          @transaction.notification = new_notification
+          end
         end
- 
+
         @transaction.save
         render 'save'
 
@@ -97,15 +104,11 @@ module MoneyCalendar
       end
     end
 
-  
-    
     get '/new_transaction' do
       @is_payment = params[:is_payment]
       render 'new_transaction'
     end
 
-   
-    
     get :stats do
       is_payment = params[:type].eql?('0') ? false : true
       @transaction_type = is_payment ? 'payments' : 'incomes'
@@ -124,33 +127,37 @@ module MoneyCalendar
     end
 
     get :pay do
-      @payment = Transaction.first( :account_id => current_account.id, :is_payment => true, :name => params[:payment_name])
+      @is_payment = params[:is_payment].to_i
+      @payment = Transaction.first( :account_id => current_account.id, :is_payment => @is_payment, :name => params[:payment_name])
       render 'pay'
     end
-    
-    get :save_payment do
 
+    get :save_payment do
+       
       begin
-        # Create transaction done for payed transaction
-        transaction = Transaction.find_by_account_id_and_name(current_account.id,params[:name])
+      # Create transaction done for payed transaction
+    
+             
+        
+        transaction = Transaction.find_by_account_id_and_name_and_is_payment(current_account.id,params[:name],params[:is_payment].to_i)
+        transaction.pay_date = params[:payment_date]
         @payment = TransactionDone.create(current_account, transaction)
         @payment.save
-        
+
         # Updating transaction date
         if transaction.periodicity == 0
-          transaction.destroy
+        transaction.destroy
         else
-          (Transaction.update_with_increased_date(current_account.id, true, @payment.name)).save
+        (Transaction.update_with_increased_date(current_account.id, params[:is_payment].to_i, @payment.name)).save
         end
-          
-        
+
         render 'save_payment'
 
       rescue TransactionError, TransactionRepeated => e
         @Message = e.message
         render 'pay'
       end
-    end  
+    end
 
     get :profile do
       render 'profile'
@@ -159,21 +166,21 @@ module MoneyCalendar
     get :save_profile do
       @current_account = current_account
       @message = ""
-      
+
       begin
         @current_account.change_email(params[:email])
       rescue MailFormatError, MailChanged => e
         @message << "#{e.message}"
       end
-      
+
       begin
         @current_account.change_name(params[:name])
       rescue NameChanged => e
         @message << "\n #{e.message}"
       end
-      
+
       @current_account.save
-      
+
       render 'profile'
     end
 

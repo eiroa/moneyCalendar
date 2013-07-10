@@ -96,7 +96,7 @@ describe Transaction do
     it 'should return [] if there are no transactions' do
       Transaction.should_receive(:all).with(:account_id => 1, :is_payment => true, :pay_date.gte => Date.today).and_return([])
 
-      result = Transaction.get_last_sorted(10, 1)
+      result = Transaction.get_last_sorted(10, 1,true)
       result.should eq []
     end
 
@@ -111,7 +111,7 @@ describe Transaction do
         t, t2
       ])
 
-      result = Transaction.get_last_sorted(10, 1)
+      result = Transaction.get_last_sorted(10, 1,true)
       result.should eq [t2, t]
     end
 
@@ -129,7 +129,7 @@ describe Transaction do
         t, t2, t3
       ])
 
-      result = Transaction.get_last_sorted(3, 1)
+      result = Transaction.get_last_sorted(3, 1,true)
       result.should eq [t2, t, t3]
     end
 
@@ -147,7 +147,7 @@ describe Transaction do
         t, t2, t3
       ])
 
-      result = Transaction.get_last_sorted(2, 1)
+      result = Transaction.get_last_sorted(2, 1,true)
       result.should eq [t2, t]
     end
   end

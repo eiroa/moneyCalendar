@@ -1,16 +1,21 @@
 <div align="center">
-	<h1>Upcoming payments</h1>
-
+	<h1>Upcoming <% if @payments %>payments<% else %>incomes<%end%></h1>
+	<% if @payments %>
+    <a href="/coming_incomes"><input type="button" value="check upcoming incomes" id="incomesButton" class="btn" /></a>
+	<%else%>
+	<a href="/coming_expirations"><input type="button" value="check upcoming payments" id="paymentsButton" class="btn" /></a>
+	<%end%>
+	
 	<% if @expirations.empty? %>
 	<p>
-		You don't have upcoming payments
+		You don't have upcoming <% if @payments %>payments<% else %>incomes<%end%>
 	</p>
 	<% else %>
 	<table class="table" align="center" border="1">
 		<tr>
-			<th>Payment name</th>
-			<th>Payment date</th>
-			<th>Confirm payment done</th>
+			<th><% if @payments %>Payment<% else %>Income<%end%> name</th>
+			<th><% if @payments %>Payment<% else %>Income<%end%> date</th>
+			<th>Confirm <% if @payments %>payment<% else %>income<%end%> received</th>
 
 			<% @expirations.each do |pay| %>
 		<tr>
@@ -19,7 +24,8 @@
 			<td>
 			<form  action="pay" method="get">
 				<input type="hidden" name="payment_name" value="<%= pay.name %>">
-				<input class="btn-primary" type="submit" value="Pay it!" id="pay_<%= pay.name %>_button">
+				<input type="hidden" name="is_payment" value="<% if @payments %>1<% else %>0<%end%>">
+				<input class="btn-primary" type="submit" value="<% if @payments %>Pay it!<% else %>Confirm reception<%end%>" id="pay_<%= pay.name %>_button">
 			</form></td>
 			<!-- <td><#%= link_to 'Remove', pay, :confirm => 'Are you sure?', :method => :delete %></td> -->
 		</tr>
