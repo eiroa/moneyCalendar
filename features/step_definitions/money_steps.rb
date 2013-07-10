@@ -70,12 +70,12 @@ end
 
 Given(/^(?:|I )visit the register payment page$/) do
   step %{I am on "coming expirations page"}
-  step %{I press "addNewPaymentButton"}
+  step %{I follow "addNewPaymentButton"}
 end
 
 Given(/^(?:|I )visit the register income page$/) do
   step %{I am on "coming expirations page"}
-  step %{I press "addNewIncomeButton"}
+  step %{I follow "addNewIncomeButton"}
 end
 
 Given(/^I have an email associated with my account$/) do
